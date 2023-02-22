@@ -8,18 +8,18 @@ const LoginForm = () => {
     setTimeout(() => showPopup("hide"), 5000);
   };
   return (
-    <div className="cover">
-      <div className="alt-login">
-        <div className="icon"></div>
+    <div className='cover'>
+      <div className='alt-login'>
+        <div className='icon'></div>
       </div>
-      <h1 className="textLogin">Welcome back!</h1>
-      <input type="text" placeholder="Username....." />
-      <input type="password" placeholder="Password....." />
+      <h1 className='textLogin'>Welcome back!</h1>
+      <input type='text' placeholder='Username.....' />
+      <input type='password' placeholder='Password.....' />
 
-      <div className="login-btn" onClick={popup}>
+      <div className='login-btn' onClick={popup}>
         Login
       </div>
-      <p className="back">Back to home</p>
+      <p className='back'>Back to home</p>
 
       <div className={popupStyle}>
         <h3>Login unsuccessfully!</h3>
