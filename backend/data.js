@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: "1",
       name: "Cargo Pants Bape",
       display: "cargo~pants~bape",
       category: "Pants",
@@ -13,6 +14,7 @@ const data = {
       description: "High Quality Paint",
     },
     {
+      _id: "2",
       name: "Short Jean Nike",
       display: "short~jean~nike",
       category: "Shoes",
@@ -25,6 +27,7 @@ const data = {
       description: "Suitable for everyone",
     },
     {
+      _id: "3",
       name: "Black Hoodies Champion",
       display: "hoodie~champion",
       category: "Hoodies",
@@ -37,6 +40,7 @@ const data = {
       description: "A lot of people use it",
     },
     {
+      _id: "4",
       name: "Blue Denim Jacket",
       display: "denim~jacket",
       category: "Jacket",
