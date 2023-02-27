@@ -30,8 +30,9 @@ main {
   min-height: 100vh;
 }
 .btn-primary {
-  background-color: #1af905;
-  color: #120263ad;
+  background-color: #05cff7;
+  color: white;
+  font-weight: bold;
 }
 .rating span {
   color: #eddd03;
@@ -47,4 +48,22 @@ main {
 }
 .small-container {
   max-width: 600px;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 80px;
+}
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #f08000;
+  color: #f08000;
+}
+.navbar {
+  height: 130px !important; /*i assume your navbar size 100px*/
+}
+.carousel-item {
+  background-position: center;
 }

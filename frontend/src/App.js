@@ -11,8 +11,20 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import CartScreen from "./components/screens/CartScreen";
 import LoginScreen from "./components/screens/LoginScreen";
+import RegisterScreen from "./components/screens/RegisterScreen";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddressScreen from "./components/screens/AddressScreen";
+import PaymentScreen from "./components/screens/PaymentScreen";
+import PreviewOrderScreen from "./components/screens/PreviewOrderScreen";
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBIcon,
+  MDBBtn,
+} from "mdb-react-ui-kit";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -21,18 +33,19 @@ function App() {
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
   };
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>
         <ToastContainer position='bottom-center' limit={1} />
         <header>
-          <Navbar bg='primary' variant='dark'>
+          <Navbar expand='sm' bg='black' variant='dark'>
             <Container>
               <LinkContainer to='/'>
                 <Navbar.Brand>ChungStore</Navbar.Brand>
               </LinkContainer>
-              <Nav className='me-auto'>
+              <Nav className='justify-content-end flex-row'>
                 <Link to='/cart' className='nav-link'>
                   Cart
                   {cart.cartItems.length > 0 && (
@@ -52,7 +65,7 @@ function App() {
                     <NavDropdown.Divider />
                     <Link
                       className='dropdown-item'
-                      to='#register'
+                      to='/'
                       onClick={signoutHandler}
                     >
                       Sign Out
@@ -72,19 +85,99 @@ function App() {
             <Routes>
               <Route path='/product/:display' element={<ProductScreen />} />
               <Route path='/login' element={<LoginScreen />} />
+              <Route path='/register' element={<RegisterScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/address' element={<AddressScreen />} />
+              <Route path='/payment' element={<PaymentScreen />} />
+              <Route path='/previeworder' element={<PreviewOrderScreen />} />
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
         <footer>
-          <div className='text-center'>All rights reserved</div>
+          <MDBFooter className='bg-dark text-center text-white'>
+            <MDBContainer className='p-4 pb-0'>
+              <section className='mb-4'>
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='facebook-f' />
+                </MDBBtn>
+
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='twitter' />
+                </MDBBtn>
+
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='google' />
+                </MDBBtn>
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='instagram' />
+                </MDBBtn>
+
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='linkedin-in' />
+                </MDBBtn>
+
+                <MDBBtn
+                  outline
+                  color='light'
+                  floating
+                  className='m-1'
+                  href='#!'
+                  role='button'
+                >
+                  <MDBIcon fab icon='github' />
+                </MDBBtn>
+              </section>
+            </MDBContainer>
+
+            <div
+              className='text-center p-3'
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+            >
+              © 2020 Copyright:
+              <a className='text-white' href='https://mdbootstrap.com/'>
+                MDBootstrap.com
+              </a>
+            </div>
+          </MDBFooter>
         </footer>
       </div>
     </BrowserRouter>
-    /* <div className="page">
-      <LoginForm />
-    </div> */
   );
 }
 export default App;
