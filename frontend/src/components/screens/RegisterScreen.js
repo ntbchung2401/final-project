@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { Shop } from "../../Shop";
 import { getError } from "../../getError";
 
-export default function SignupScreen() {
+export default function RegisterScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");

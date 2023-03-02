@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import Axios from "axios";
+import React, { useContext, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
@@ -7,10 +8,28 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import CheckoutSteps from "../CheckoutSteps";
+import LoadingSpinner from "../LoadingSpinner";
 import { Shop } from "../../Shop";
+import { toast } from "react-toastify";
+import { getError } from "../../getError";
 
 export default function PreviewOrderScreen() {
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "CREATE_REQUEST":
+        return { ...state, loading: true };
+      case "CREATE_SUCCESS":
+        return { ...state, loading: false };
+      case "CREATE_FAIL":
+        return { ...state, loading: false };
+      default:
+        return state;
+    }
+  };
   const navigate = useNavigate();
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: false,
+  });
   const { state, dispatch: ctxDispatch } = useContext(Shop);
   const { cart, userInfo } = state;
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
@@ -21,7 +40,36 @@ export default function PreviewOrderScreen() {
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
-  const placeOrderHandler = async () => {};
+  const placeOrderHandler = async () => {
+    try {
+      dispatch({ type: "CREATE_REQUEST" });
+
+      const { data } = await Axios.post(
+        "/api/orders",
+        {
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          itemsPrice: cart.itemsPrice,
+          shippingPrice: cart.shippingPrice,
+          taxPrice: cart.taxPrice,
+          totalPrice: cart.totalPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      ctxDispatch({ type: "CART_CLEAR" });
+      dispatch({ type: "CREATE_SUCCESS" });
+      localStorage.removeItem("cartItems");
+      navigate(`/order/${data.order._id}`);
+    } catch (err) {
+      dispatch({ type: "CREATE_FAIL" });
+      toast.error(getError(err));
+    }
+  };
 
   useEffect(() => {
     if (!cart.paymentMethod) {
@@ -130,6 +178,7 @@ export default function PreviewOrderScreen() {
                       Order
                     </Button>
                   </div>
+                  {loading && <LoadingSpinner></LoadingSpinner>}
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>

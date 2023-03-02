@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddressScreen from "./components/screens/AddressScreen";
 import PaymentScreen from "./components/screens/PaymentScreen";
+import OrderScreen from "./components/screens/OrderScreen";
 import PreviewOrderScreen from "./components/screens/PreviewOrderScreen";
 import {
   MDBFooter,
@@ -90,6 +91,7 @@ function App() {
               <Route path='/address' element={<AddressScreen />} />
               <Route path='/payment' element={<PaymentScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
+              <Route path='/order/:id' element={<OrderScreen />}></Route>
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>

@@ -60,6 +60,8 @@ function reducer(state, action) {
           shippingAddress: action.payload,
         },
       };
+    case "CART_CLEAR":
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     case "SAVE_PAYMENT_METHOD":
       return {
         ...state,
