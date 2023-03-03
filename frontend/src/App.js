@@ -5,23 +5,25 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Shop } from "./Shop";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import CartScreen from "./components/screens/CartScreen";
 import LoginScreen from "./components/screens/LoginScreen";
 import RegisterScreen from "./components/screens/RegisterScreen";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddressScreen from "./components/screens/AddressScreen";
 import PaymentScreen from "./components/screens/PaymentScreen";
 import OrderScreen from "./components/screens/OrderScreen";
-
 import PreviewOrderScreen from "./components/screens/PreviewOrderScreen";
 import { MDBFooter, MDBContainer, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import OrderHistoryScreen from "./components/screens/OrderHistoryScreen";
-import ProfileScreen from "./components/screens/ProfileScreen";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
+import { getError } from "./getError";
+import SearchBox from "./components/screens/SearchBox";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -31,19 +33,46 @@ function App() {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
+    window.location.href = "/login";
   };
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
   return (
     <BrowserRouter>
-      <div className='d-flex flex-column site-container'>
+      <div
+        className={
+          sidebarIsOpen
+            ? "d-flex flex-column site-container active-cont"
+            : "d-flex flex-column site-container"
+        }
+      >
         <ToastContainer position='bottom-center' limit={1} />
         <header>
           <Navbar expand='sm' bg='black' variant='dark'>
             <Container>
+              <Button
+                variant='dark'
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
+                <i className='fas fa-bars'></i>
+              </Button>
               <LinkContainer to='/'>
                 <Navbar.Brand>ChungStore</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
+                <SearchBox />
                 <Nav className='me-auto w-100 justify-content-end'>
                   <Link to='/cart' className='nav-link'>
                     Cart
@@ -80,6 +109,29 @@ function App() {
             </Container>
           </Navbar>
         </header>
+        <div
+          className={
+            sidebarIsOpen
+              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+              : "side-navbar d-flex justify-content-between flex-wrap flex-column"
+          }
+        >
+          <Nav className='flex-column text-white w-100 p-2'>
+            <Nav.Item>
+              <strong>Categories</strong>
+            </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer
+                  to={`/search/category=${category}`}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+          </Nav>
+        </div>
         <main>
           <Container className='mt-3'>
             <Routes>
@@ -89,7 +141,6 @@ function App() {
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/address' element={<AddressScreen />} />
               <Route path='/payment' element={<PaymentScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
               <Route path='/orderhistory' element={<OrderHistoryScreen />} />
