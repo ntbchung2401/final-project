@@ -17,15 +17,10 @@ import "react-toastify/dist/ReactToastify.css";
 import AddressScreen from "./components/screens/AddressScreen";
 import PaymentScreen from "./components/screens/PaymentScreen";
 import OrderScreen from "./components/screens/OrderScreen";
+
 import PreviewOrderScreen from "./components/screens/PreviewOrderScreen";
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBIcon,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import { MDBFooter, MDBContainer, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
+import OrderHistoryScreen from "./components/screens/OrderHistoryScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -46,38 +41,41 @@ function App() {
               <LinkContainer to='/'>
                 <Navbar.Brand>ChungStore</Navbar.Brand>
               </LinkContainer>
-              <Nav className='justify-content-end flex-row'>
-                <Link to='/cart' className='nav-link'>
-                  Cart
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg='danger'>
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    </Badge>
-                  )}
-                </Link>
-                {userInfo ? (
-                  <NavDropdown title={userInfo.name} id='basic-nav-dropdown'>
-                    <LinkContainer to='/profile'>
-                      <NavDropdown.Item>User Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to='/orderhistory'>
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
-                    <Link
-                      className='dropdown-item'
-                      to='/'
-                      onClick={signoutHandler}
-                    >
-                      Sign Out
-                    </Link>
-                  </NavDropdown>
-                ) : (
-                  <Link className='nav-link' to='/login'>
-                    Sign In
+              <Navbar.Toggle aria-controls='basic-navbar-nav' />
+              <Navbar.Collapse id='basic-navbar-nav'>
+                <Nav className='me-auto w-100 justify-content-end'>
+                  <Link to='/cart' className='nav-link'>
+                    Cart
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg='danger'>
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
                   </Link>
-                )}
-              </Nav>
+                  {userInfo ? (
+                    <NavDropdown title={userInfo.name} id='basic-nav-dropdown'>
+                      <LinkContainer to='/profile'>
+                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to='/orderhistory'>
+                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Divider />
+                      <Link
+                        className='dropdown-item'
+                        to='/'
+                        onClick={signoutHandler}
+                      >
+                        Sign Out
+                      </Link>
+                    </NavDropdown>
+                  ) : (
+                    <Link className='nav-link' to='/login'>
+                      Sign In
+                    </Link>
+                  )}
+                </Nav>
+              </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
@@ -91,7 +89,9 @@ function App() {
               <Route path='/address' element={<AddressScreen />} />
               <Route path='/payment' element={<PaymentScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />}></Route>
+              <Route path='/order/:id' element={<OrderScreen />} />
+              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
+
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
