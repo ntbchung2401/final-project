@@ -40,10 +40,20 @@ export default function PaymentScreen() {
           <div className='mb-3'>
             <Form.Check
               type='radio'
-              id='Momo'
-              label='Momo'
-              value='Momo'
-              checked={paymentMethodName === "Momo"}
+              id='PayPal'
+              label='PayPal'
+              value='PayPal'
+              checked={paymentMethodName === "PayPal"}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            />
+          </div>
+          <div className='mb-3'>
+            <Form.Check
+              type='radio'
+              id='MoMo'
+              label='MoMo'
+              value='MoMo'
+              checked={paymentMethodName === "MoMo"}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </div>
