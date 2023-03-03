@@ -21,6 +21,7 @@ import OrderScreen from "./components/screens/OrderScreen";
 import PreviewOrderScreen from "./components/screens/PreviewOrderScreen";
 import { MDBFooter, MDBContainer, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import OrderHistoryScreen from "./components/screens/OrderHistoryScreen";
+import ProfileScreen from "./components/screens/ProfileScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -88,6 +89,7 @@ function App() {
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/address' element={<AddressScreen />} />
               <Route path='/payment' element={<PaymentScreen />} />
+              <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
               <Route path='/orderhistory' element={<OrderHistoryScreen />} />
