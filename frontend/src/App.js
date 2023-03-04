@@ -26,6 +26,9 @@ import { getError } from "./getError";
 import SearchBox from "./components/SearchBox";
 import ProfileScreen from "./components/screens/ProfileScreen";
 import SearchScreen from "./components/screens/SearchScreen";
+import AdminRoute from "./components/AdminRoute";
+import DashboardScreen from "./components/screens/DashboardScreen";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -106,6 +109,22 @@ function App() {
                       Sign In
                     </Link>
                   )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title='Admin' id='admin-nav-dropdown'>
+                      <LinkContainer to='/admin/dashboard'>
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to='/admin/productlist'>
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to='/admin/orderlist'>
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to='/admin/userlist'>
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -147,10 +166,40 @@ function App() {
               <Route path='/address' element={<AddressScreen />} />
               <Route path='/payment' element={<PaymentScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />} />
+              <Route
+                path='/order/:id'
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route path='/search' element={<SearchScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
-              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
+              <Route
+                path='/profile'
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='/orderhistory'
+                element={
+                  <ProtectedRoute>
+                    <OrderHistoryScreen />
+                  </ProtectedRoute>
+                }
+              />
+              {/* Admin Routes */}
+              <Route
+                path='/admin/dashboard'
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>
+                }
+              ></Route>
 
               <Route path='/' element={<HomeScreen />} />
             </Routes>
