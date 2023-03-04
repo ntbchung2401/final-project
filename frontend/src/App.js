@@ -23,7 +23,9 @@ import OrderHistoryScreen from "./components/screens/OrderHistoryScreen";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { getError } from "./getError";
-import SearchBox from "./components/screens/SearchBox";
+import SearchBox from "./components/SearchBox";
+import ProfileScreen from "./components/screens/ProfileScreen";
+import SearchScreen from "./components/screens/SearchScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -123,7 +125,10 @@ function App() {
             {categories.map((category) => (
               <Nav.Item key={category}>
                 <LinkContainer
-                  to={`/search/category=${category}`}
+                  to={{
+                    pathname: "/search",
+                    search: `?category=${category}`,
+                  }}
                   onClick={() => setSidebarIsOpen(false)}
                 >
                   <Nav.Link>{category}</Nav.Link>
@@ -143,6 +148,8 @@ function App() {
               <Route path='/payment' element={<PaymentScreen />} />
               <Route path='/previeworder' element={<PreviewOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
+              <Route path='/search' element={<SearchScreen />} />
+              <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/orderhistory' element={<OrderHistoryScreen />} />
 
               <Route path='/' element={<HomeScreen />} />
