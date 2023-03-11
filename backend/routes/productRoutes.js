@@ -1,6 +1,7 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import { isAuth, isAdmin } from "../utils.js";
 
 const productRouter = express.Router();
 
@@ -8,7 +9,85 @@ productRouter.get("/", async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
+
+productRouter.post(
+  "/createproduct",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const newProduct = new Product({
+      name: req.body.name,
+      display: req.body.display,
+      image: req.body.image,
+      price: req.body.price,
+      category: req.body.category,
+      brand: req.body.brand,
+      counInStock: req.body.counInStock,
+      rating: req.body.rating,
+      numReviews: req.body.numReviews,
+      description: req.body.description,
+    });
+    const product = await newProduct.save();
+    res.send({
+      _id: product._id,
+      name: product.name,
+      display: product.display,
+      image: product.image,
+      price: product.price,
+      category: product.category,
+      brand: product.brand,
+      counInStock: product.counInStock,
+      description: product.description,
+    });
+  })
+);
+
+productRouter.put(
+  "/:id",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+      product.name = req.body.name;
+      product.display = req.body.display;
+      product.price = req.body.price;
+      product.image = req.body.image;
+      product.category = req.body.category;
+      product.brand = req.body.brand;
+      product.counInStock = req.body.counInStock;
+      product.description = req.body.description;
+      await product.save();
+      res.send({ message: "Product Created" });
+    } else {
+      res.status(404).send({ message: "Product Not Found" });
+    }
+  })
+);
 const PAGE_SIZE = 3;
+productRouter.get(
+  "/admin",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { query } = req;
+    const page = query.page || 1;
+    const pageSize = query.pageSize || PAGE_SIZE;
+
+    const products = await Product.find()
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    const countProducts = await Product.countDocuments();
+    res.send({
+      products,
+      countProducts,
+      page,
+      pages: Math.ceil(countProducts / pageSize),
+    });
+  })
+);
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
