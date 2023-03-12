@@ -56,7 +56,7 @@ export default function ProductEditScreen() {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  const [counInStock, setCounInStock] = useState("");
+  const [counInStock, setcounInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
@@ -70,7 +70,7 @@ export default function ProductEditScreen() {
         setPrice(data.price);
         setImage(data.image);
         setCategory(data.category);
-        setCounInStock(data.counInStock);
+        setcounInStock(data.counInStock);
         setBrand(data.brand);
         setDescription(data.description);
         dispatch({ type: "FETCH_SUCCESS" });
@@ -197,7 +197,7 @@ export default function ProductEditScreen() {
             <Form.Label>Count In Stock</Form.Label>
             <Form.Control
               value={counInStock}
-              onChange={(e) => setCounInStock(e.target.value)}
+              onChange={(e) => setcounInStock(e.target.value)}
               required
             />
           </Form.Group>

@@ -48,7 +48,7 @@ main {
   height: 80px;
 }
 .small-container {
-  max-width: 600px;
+  max-width: 800px;
 }
 .navbar-brand {
   font-weight: bold;
@@ -91,4 +91,94 @@ main {
 }
 .text-bold {
   font-weight: bold;
+}
+.login_form_container,
+.register_form_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  justify-content: center;
+}
+.login_form_image {
+  background-image: url(https://res.cloudinary.com/dshdorhq9/image/upload/v1678490373/samples/ecommerce/accessories-bag.jpg);
+  height: 90vh;
+  background-size: cover;
+  margin-bottom: 10px;
+  margin-right: 0;
+}
+.hero-banner {
+  padding: 20px 0;
+  position: relative;
+  background-image: linear-gradient(to right, grey, black);
+  height: calc(100vh);
+}
+.content {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin: 0 auto;
+  flex-direction: row;
+  max-width: 1200px;
+}
+.banner-img {
+  position: relative;
+  z-index: 9;
+  width: 500px;
+  margin-bottom: 20px;
+  margin-right: 60px;
+  margin-top: 50px;
+  margin-bottom: 0;
+}
+.text-content {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.text-content h1 {
+  font-size: 150px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.text-content p {
+  max-width: 400px;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.contact {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.banner-contact {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  width: fit-content;
+  border: 2px solid white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.banner-contact-v2 {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  width: fit-content;
+  border: 2px solid white;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+.banner-contact-v2:hover,
+.banner-contact:hover {
+  opacity: 0.6;
 }

@@ -56,7 +56,7 @@ export default function CreateProductScreen() {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  const [counInStock, setCounInStock] = useState("");
+  const [counInStock, setcounInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
@@ -180,7 +180,7 @@ export default function CreateProductScreen() {
             <Form.Label>Count In Stock</Form.Label>
             <Form.Control
               value={counInStock}
-              onChange={(e) => setCounInStock(e.target.value)}
+              onChange={(e) => setcounInStock(e.target.value)}
               required
             />
           </Form.Group>

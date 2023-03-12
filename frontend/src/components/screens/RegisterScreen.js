@@ -8,6 +8,8 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Shop } from "../../Shop";
 import { getError } from "../../getError";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 export default function RegisterScreen() {
   const navigate = useNavigate();
@@ -49,49 +51,57 @@ export default function RegisterScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className='small-container'>
+    <Container>
       <Helmet>
         <title>Register</title>
       </Helmet>
-      <h1 className='my-3'>Register</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='mb-3' controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control onChange={(e) => setName(e.target.value)} required />
-        </Form.Group>
+      <Row>
+        <Col md={6} className='register_form_container'>
+          <h1 className='my-3'>Register</h1>
+          <Form style={{ width: "80%" }} onSubmit={submitHandler}>
+            <Form.Group className='mb-3' controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type='email'
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Form.Group className='mb-3' controlId='confirmPassword'>
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type='password'
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-        </Form.Group>
-        <div className='mb-3'>
-          <Button type='submit'>Register</Button>
-        </div>
-        <div className='mb-3'>
-          Already have an account?{" "}
-          <Link to={`/login?redirect=${redirect}`}>Log-in</Link>
-        </div>
-      </Form>
+            <Form.Group className='mb-3' controlId='email'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='email'
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Form.Group className='mb-3' controlId='confirmPassword'>
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Form.Group>
+            <div className='mb-3'>
+              <Button type='submit'>Register</Button>
+            </div>
+            <div className='mb-3'>
+              Already have an account?{" "}
+              <Link to={`/login?redirect=${redirect}`}>Log-in</Link>
+            </div>
+          </Form>
+        </Col>
+        <Col md={6} className='login_form_image'></Col>
+      </Row>
     </Container>
   );
 }

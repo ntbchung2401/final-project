@@ -7,14 +7,21 @@ import Product from "../Product";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorMessage from "../ErrorMessage";
 import { Helmet } from "react-helmet-async";
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import Banner from "../Banner";
+import { Link, useLocation } from "react-router-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
       return { ...state, loading: true };
     case "FETCH_SUCCESS":
-      return { ...state, products: action.payload, loading: false };
+      return {
+        ...state,
+        products: action.payload,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        loading: false,
+      };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
     default:
@@ -23,11 +30,17 @@ const reducer = (state, action) => {
 };
 
 function HomeScreen() {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
-    products: [],
-    loading: true,
-    error: "",
-  });
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const page = sp.get("page") || 1;
+  const [{ loading, error, pages, products }, dispatch] = useReducer(
+    logger(reducer),
+    {
+      products: [],
+      loading: true,
+      error: "",
+    }
+  );
   //const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -47,34 +60,8 @@ function HomeScreen() {
       <Helmet>
         <title>ChungStore</title>
       </Helmet>
-      <h1>Hot Product</h1>
       <div>
-        <MDBCarousel showControls fade>
-          <MDBCarouselItem
-            className='d-block h-100'
-            itemId={1}
-            src='../images/anh1.jpg'
-            width={480}
-            height={640}
-            alt='...'
-          />
-          <MDBCarouselItem
-            className='d-block h-100'
-            itemId={2}
-            src='../images/anh2.jpg'
-            width={480}
-            height={640}
-            alt='...'
-          />
-          <MDBCarouselItem
-            className='d-block h-100'
-            itemId={3}
-            src='../images/anh3.jpg'
-            width={480}
-            height={640}
-            alt='...'
-          />
-        </MDBCarousel>
+        <Banner />
       </div>
       <h1>Features Product</h1>
       <div className='products'>
@@ -91,6 +78,17 @@ function HomeScreen() {
             ))}
           </Row>
         )}
+      </div>
+      <div>
+        {[...Array(pages).keys()].map((x) => (
+          <Link
+            className={x + 1 === Number(page) ? "btn text-bold" : "btn"}
+            key={x + 1}
+            to={`/?page=${x + 1}`}
+          >
+            {x + 1}
+          </Link>
+        ))}
       </div>
     </div>
   );
