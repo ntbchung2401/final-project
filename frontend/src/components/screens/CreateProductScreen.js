@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorMessage from "../ErrorMessage";
@@ -14,11 +14,13 @@ import { toast } from "react-toastify";
 const reducer = (state, action) => {
   switch (action.type) {
     case "CREATE_REQUEST":
-      return { ...state, loadingCreate: true };
+      // return console.log(state, "state");
+      return { ...state, loadingCreate: true, errorUpload: "" };
     case "CREATE_SUCCESS":
       return {
         ...state,
         loadingCreate: false,
+        errorUpload: "",
       };
     case "CREATE_FAIL":
       return { ...state, loadingCreate: false };
@@ -38,18 +40,17 @@ const reducer = (state, action) => {
 };
 export default function CreateProductScreen() {
   const navigate = useNavigate();
-  const { search } = useLocation();
   const params = useParams(); // /product/:id
-  const { id: productId } = params;
-  const redirectInUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/admin/createproduct";
+  const { _id: productId } = params;
   const { state } = useContext(Shop);
   const { userInfo } = state;
-  const [{ loading, error, loadingCreate, loadingUpload }, dispatch] =
-    useReducer(reducer, {
+  const [{ error, loadingCreate, loadingUpload }, dispatch] = useReducer(
+    reducer,
+    {
       loading: true,
       error: "",
-    });
+    }
+  );
 
   const [name, setName] = useState("");
   const [display, setDisplay] = useState("");
@@ -60,39 +61,37 @@ export default function CreateProductScreen() {
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [navigate, redirect, userInfo]);
   const createHandler = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
       dispatch({ type: "CREATE_REQUEST" });
       const { data } = await axios.post(
-        "/api/products/createproduct",
-
+        "/api/products",
         {
-          productId,
+          // productId,
           name,
           display,
           price,
           image,
+          category,
           brand,
           counInStock,
           description,
         },
         {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
         }
       );
       toast.success("product created successfully");
       dispatch({ type: "CREATE_SUCCESS" });
-      navigate(`/admin/product/${data.product._id}`);
+      navigate(`/product/${data.display}`);
     } catch (err) {
       toast.error(getError(error));
       dispatch({
         type: "CREATE_FAIL",
+        payload: getError(err),
       });
     }
   };
@@ -110,7 +109,7 @@ export default function CreateProductScreen() {
         },
       });
       dispatch({ type: "UPLOAD_SUCCESS" });
-
+      localStorage.setItem("userInfo", JSON.stringify(data));
       toast.success("Image uploaded successfully");
       setImage(data.secure_url);
     } catch (err) {
@@ -118,88 +117,86 @@ export default function CreateProductScreen() {
       dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
     }
   };
+
   return (
     <Container className='small-container'>
       <Helmet>
         <title>Create New Product</title>
       </Helmet>
       <h1>Create New Product</h1>
-
-      {loading ? (
-        <LoadingSpinner></LoadingSpinner>
-      ) : error ? (
-        <ErrorMessage variant='danger'>{error}</ErrorMessage>
-      ) : (
-        <Form onSubmit={createHandler}>
-          <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='display'>
-            <Form.Label>Display</Form.Label>
-            <Form.Control
-              value={display}
-              onChange={(e) => setDisplay(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='imageFile'>
-            <Form.Label>Upload File</Form.Label>
-            <Form.Control type='file' onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingSpinner></LoadingSpinner>}
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='category'>
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='brand'>
-            <Form.Label>Brand</Form.Label>
-            <Form.Control
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='counInStock'>
-            <Form.Label>Count In Stock</Form.Label>
-            <Form.Control
-              value={counInStock}
-              onChange={(e) => setcounInStock(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='description'>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <div className='mb-3'>
-            <Button disabled={loadingCreate} type='submit'>
-              Create
-            </Button>
-            {loadingCreate && <LoadingSpinner></LoadingSpinner>}
-          </div>
-        </Form>
-      )}
+      <Form onSubmit={createHandler}>
+        <Form.Group className='mb-3' controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='display'>
+          <Form.Label>Display</Form.Label>
+          <Form.Control
+            value={display}
+            onChange={(e) => setDisplay(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='price'>
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='imageFile'>
+          <Form.Label>Upload File</Form.Label>
+          <Form.Control type='file' onChange={uploadFileHandler} />
+          {loadingUpload && <LoadingSpinner></LoadingSpinner>}
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='category'>
+          <Form.Label>Category</Form.Label>
+          <Form.Control
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='brand'>
+          <Form.Label>Brand</Form.Label>
+          <Form.Control
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='counInStock'>
+          <Form.Label>Count In Stock</Form.Label>
+          <Form.Control
+            value={counInStock}
+            onChange={(e) => setcounInStock(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='description'>
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <div className='mb-3'>
+          <Button
+            disabled={loadingCreate}
+            type='submit'
+            // onClick={createHandler}
+          >
+            Create
+          </Button>
+          {loadingCreate && <LoadingSpinner></LoadingSpinner>}
+        </div>
+      </Form>
     </Container>
   );
 }

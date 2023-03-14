@@ -33,6 +33,8 @@ import ProductListScreen from "./components/screens/ProductListScreen";
 import ProductEditScreen from "./components/screens/EditProductScreen";
 import CreateProductScreen from "./components/screens/CreateProductScreen";
 import OrderListScreen from "./components/screens/OrderListScreen";
+import UserListScreen from "./components/screens/UserListScreen";
+import UserEditScreen from "./components/screens/UserEditScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -236,7 +238,22 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-
+              <Route
+                path='/admin/userlist'
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path='/admin/user/:id'
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
@@ -318,7 +335,7 @@ function App() {
             >
               © 2020 Copyright:
               <a className='text-white' href='https://mdbootstrap.com/'>
-                MDBootstrap.com
+                ChungStore.com
               </a>
             </div>
           </MDBFooter>

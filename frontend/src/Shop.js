@@ -6,6 +6,9 @@ const initialState = {
   userInfo: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
+    newproduct: localStorage.getItem("newproduct")
+    ? JSON.parse(localStorage.getItem("newproduct"))
+    : {},
   cart: {
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))

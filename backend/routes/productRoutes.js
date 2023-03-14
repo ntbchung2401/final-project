@@ -11,12 +11,12 @@ productRouter.get("/", async (req, res) => {
 });
 
 productRouter.post(
-  "/createproduct",
+  "/",
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const productId = req.params.id;
     const newProduct = new Product({
+      // _id : req.body._id,
       name: req.body.name,
       display: req.body.display,
       image: req.body.image,
@@ -24,8 +24,8 @@ productRouter.post(
       category: req.body.category,
       brand: req.body.brand,
       counInStock: req.body.counInStock,
-      rating: req.body.rating,
-      numReviews: req.body.numReviews,
+      rating: 0,
+      numReviews: 0,
       description: req.body.description,
     });
     const product = await newProduct.save();
@@ -38,8 +38,11 @@ productRouter.post(
       category: product.category,
       brand: product.brand,
       counInStock: product.counInStock,
+      rating: product.rating,
+      numReviews: product.numReviews,
       description: product.description,
     });
+    res.status(201).send({ message: "New Product Created", product });
   })
 );
 
@@ -80,7 +83,7 @@ productRouter.delete(
     }
   })
 );
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 20;
 productRouter.get(
   "/admin",
   isAuth,
