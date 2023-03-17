@@ -1,0 +1,195 @@
+@import '../../components/GlobalStyles/mixins.scss';
+.heroBanner {
+    padding: 40px 0;
+    position: relative;
+    background-image: linear-gradient(to right, grey, black);
+    @include md {
+        height: calc(100vh - 60px);
+    }
+    .content {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0 auto;
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column-reverse;
+        max-width: calc(100% - 20px);
+        @include md {
+            flex-direction: row;
+            max-width: 1200px;
+        }
+        .bannerImg {
+            position: relative;
+            z-index: 9;
+            width: 200px;
+            margin-bottom: 20px;
+            @include md {
+                width: 450px;
+                margin-bottom: 20px;
+                margin-right: 60px;
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+            @include xxl {
+                width: 500px;
+                margin-top: 0;
+                margin-right: 0;
+            }
+        }
+        .textContent {
+            align-items: center;
+            text-align: center;
+            display: flex;
+            color: white;
+            flex-direction: column;
+            @include md {
+                position: absolute;
+                left: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            @include xxl {
+                left: 0;
+            }
+            h1 {
+                font-size: 80px;
+                font-weight: 800;
+                color: white;
+                line-height: 1;
+                margin-bottom: 20px;
+                @include md {
+                    font-size: 180px;
+                }
+            }
+            p {
+                max-width: 300px;
+                margin-bottom: 14px;
+                font-size: 14px;
+                line-height: 20px;
+                @include md {
+                    max-width: 600px;
+                    margin-bottom: 40px;
+                    font-size: 18px;
+                    line-height: 26px;
+                }
+            }
+
+            .contact {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                .bannerContact {
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    font-size: 13px;
+                    width: fit-content;
+                    border: 2px solid white;
+                    padding: 10px 20px;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: white;
+                        color: black;
+                        opacity: 0.6;
+                    }
+                }
+                .bannerContact2 {
+                    background-color: white;
+                    color: black;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    font-size: 13px;
+                    width: fit-content;
+                    border: 2px solid white;
+                    padding: 10px 20px;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: white;
+                        color: black;
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// .heroBanner {
+//     padding: 20px 0;
+//     position: relative;
+//     background-image: linear-gradient(to right, grey, black);
+//     height: calc(100vh);
+// }
+// .content {
+//     height: 100%;
+//     display: flex;
+//     justify-content: flex-end;
+//     flex-direction: column;
+//     margin: 0 auto;
+//     flex-direction: row;
+//     max-width: 1200px;
+// }
+// .bannerImg {
+//     position: relative;
+//     z-index: 9;
+//     width: 500px;
+//     margin-bottom: 20px;
+//     margin-right: 60px;
+//     margin-top: 50px;
+//     margin-bottom: 0;
+// }
+// .textContent {
+//     color: white;
+//     text-align: center;
+//     display: flex;
+//     flex-direction: column;
+//     position: absolute;
+//     left: 50px;
+//     top: 50%;
+//     transform: translateY(-50%);
+// }
+// .textContent h1 {
+//     font-size: 150px;
+//     font-weight: 700;
+//     line-height: 1;
+//     margin-bottom: 20px;
+// }
+// .text-content p {
+//     max-width: 400px;
+//     font-size: 16px;
+//     line-height: 20px;
+//     margin-bottom: 20px;
+// }
+// .contact {
+//     display: flex;
+//     justify-content: center;
+//     gap: 20px;
+// }
+// .banner-contact {
+//     text-transform: uppercase;
+//     font-size: 13px;
+//     font-weight: 500;
+//     width: fit-content;
+//     border: 2px solid white;
+//     padding: 10px 20px;
+//     cursor: pointer;
+// }
+// .banner-contact-v2 {
+//     text-transform: uppercase;
+//     font-size: 13px;
+//     font-weight: 500;
+//     width: fit-content;
+//     border: 2px solid white;
+//     padding: 10px 20px;
+//     cursor: pointer;
+//     background-color: white;
+//     color: black;
+// }
+// .banner-contact-v2:hover,
+// .banner-contact:hover {
+//     opacity: 0.6;
+// }
