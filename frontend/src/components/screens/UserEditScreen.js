@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { Shop } from '../../Shop';
 import { getError } from '../../getError';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const reducer = (state, action) => {
     switch (action.type) {

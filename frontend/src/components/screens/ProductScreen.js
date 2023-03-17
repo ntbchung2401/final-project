@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { Helmet } from 'react-helmet-async';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { getError } from '../../getError';
 import { Shop } from '../../Shop';
 

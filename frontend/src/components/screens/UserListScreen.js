@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getError } from '../../getError';
 import { Shop } from '../../Shop';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const reducer = (state, action) => {

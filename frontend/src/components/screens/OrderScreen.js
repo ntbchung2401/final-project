@@ -8,7 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Shop } from '../../Shop';
 import { getError } from '../../getError';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';

@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import CheckoutSteps from '../CheckoutSteps';
+import CheckoutSteps from '../CheckoutSteps/CheckoutSteps';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { Shop } from '../../Shop';
 import { toast } from 'react-toastify';

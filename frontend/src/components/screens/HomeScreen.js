@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from '../Product';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Helmet } from 'react-helmet-async';
 import Banner from '../Banner/Banner';
 import { Link, useLocation } from 'react-router-dom';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Shop } from '../../Shop';
 import { getError } from '../../getError';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Button from 'react-bootstrap/esm/Button';
 
 const reducer = (state, action) => {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from 'react';
 import Chart from 'react-google-charts';
 import axios from 'axios';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Shop } from '../../Shop';
 import { getError } from '../../getError';
 import Row from 'react-bootstrap/Row';

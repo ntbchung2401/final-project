@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Shop } from '../../Shop';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
