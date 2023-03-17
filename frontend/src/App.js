@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { getError } from './getError';
-import SearchBox from './components/SearchBox';
+import SearchBox from './components/SearchBox/SearchBox';
 import Footer from './components/Footer/Footer';
 import { privateRoutes, publicRoutes } from './routes';
 

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../../getError';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import Rating from '../Rating';
+import Rating from '../Rating/Rating';
 import Product from '../Product';
 import { LinkContainer } from 'react-router-bootstrap';
 
