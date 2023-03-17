@@ -1,6 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import HomeScreen from './components/screens/HomeScreen';
-import ProductScreen from './components/screens/ProductScreen';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -9,32 +7,14 @@ import { useContext, useEffect, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import CartScreen from './components/screens/CartScreen';
-import LoginScreen from './components/screens/LoginScreen';
-import RegisterScreen from './components/screens/RegisterScreen';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AddressScreen from './components/screens/AddressScreen';
-import PaymentScreen from './components/screens/PaymentScreen';
-import OrderScreen from './components/screens/OrderScreen';
-import PreviewOrderScreen from './components/screens/PreviewOrderScreen';
-import OrderHistoryScreen from './components/screens/OrderHistoryScreen';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { getError } from './getError';
 import SearchBox from './components/SearchBox';
-import ProfileScreen from './components/screens/ProfileScreen';
-import SearchScreen from './components/screens/SearchScreen';
-import AdminRoute from './components/AdminRoute';
-import DashboardScreen from './components/screens/DashboardScreen';
-import ProtectedRoute from './components/ProtectedRoute';
-import ProductListScreen from './components/screens/ProductListScreen';
-import ProductEditScreen from './components/screens/EditProductScreen';
-import CreateProductScreen from './components/screens/CreateProductScreen';
-import OrderListScreen from './components/screens/OrderListScreen';
-import UserListScreen from './components/screens/UserListScreen';
-import UserEditScreen from './components/screens/UserEditScreen';
 import Footer from './components/Footer/Footer';
+import { privateRoutes, publicRoutes } from './routes';
 
 function App() {
     const { state, dispatch: ctxDispatch } = useContext(Shop);
@@ -60,7 +40,7 @@ function App() {
         fetchCategories();
     }, []);
     return (
-        <BrowserRouter>
+        <Router>
             <div
                 className={
                     sidebarIsOpen
@@ -158,96 +138,27 @@ function App() {
                 <main>
                     <Container className="mt-3">
                         <Routes>
-                            <Route path="/product/:display" element={<ProductScreen />} />
-                            <Route path="/login" element={<LoginScreen />} />
-                            <Route path="/register" element={<RegisterScreen />} />
-                            <Route
-                                path="/admin/productlist"
-                                element={
-                                    <AdminRoute>
-                                        <ProductListScreen />
-                                    </AdminRoute>
-                                }
-                            ></Route>
-                            <Route path="/cart" element={<CartScreen />} />
-                            <Route path="/address" element={<AddressScreen />} />
-                            <Route path="/payment" element={<PaymentScreen />} />
-                            <Route path="/previeworder" element={<PreviewOrderScreen />} />
-                            <Route
-                                path="/admin/product/:id"
-                                element={
-                                    <AdminRoute>
-                                        <ProductEditScreen />
-                                    </AdminRoute>
-                                }
-                            ></Route>
-                            <Route
-                                path="/admin/createproduct"
-                                element={
-                                    <AdminRoute>
-                                        <CreateProductScreen />
-                                    </AdminRoute>
-                                }
-                            ></Route>
-                            <Route
-                                path="/order/:id"
-                                element={
-                                    <ProtectedRoute>
-                                        <OrderScreen />
-                                    </ProtectedRoute>
-                                }
-                            ></Route>
-                            <Route path="/search" element={<SearchScreen />} />
-                            <Route
-                                path="/profile"
-                                element={
-                                    <ProtectedRoute>
-                                        <ProfileScreen />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            <Route
-                                path="/admin/orderlist"
-                                element={
-                                    <AdminRoute>
-                                        <OrderListScreen />
-                                    </AdminRoute>
-                                }
-                            />
-                            <Route
-                                path="/orderhistory"
-                                element={
-                                    <ProtectedRoute>
-                                        <OrderHistoryScreen />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            {/* Admin Routes */}
-                            <Route
-                                path="/admin/dashboard"
-                                element={
-                                    <AdminRoute>
-                                        <DashboardScreen />
-                                    </AdminRoute>
-                                }
-                            />
-                            <Route
-                                path="/admin/userlist"
-                                element={
-                                    <AdminRoute>
-                                        <UserListScreen />
-                                    </AdminRoute>
-                                }
-                            />
-                            <Route
-                                path="/admin/user/:id"
-                                element={
-                                    <AdminRoute>
-                                        <UserEditScreen />
-                                    </AdminRoute>
-                                }
-                            />
-                            <Route path="/" element={<HomeScreen />} />
+                            {privateRoutes.map((route, index) => {
+                                const Page = route.component;
+                                const Auth = route.role;
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={
+                                            <Auth>
+                                                <Page />
+                                            </Auth>
+                                        }
+                                    />
+                                );
+                            })}
+                        </Routes>
+                        <Routes>
+                            {publicRoutes.map((route, index) => {
+                                const Page = route.component;
+                                return <Route key={index} path={route.path} element={<Page />} />;
+                            })}
                         </Routes>
                     </Container>
                 </main>
@@ -255,7 +166,7 @@ function App() {
                     <Footer />
                 </footer>
             </div>
-        </BrowserRouter>
+        </Router>
     );
 }
 export default App;
