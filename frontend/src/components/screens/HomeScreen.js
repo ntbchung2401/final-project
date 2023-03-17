@@ -7,7 +7,7 @@ import Product from "../Product";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorMessage from "../ErrorMessage";
 import { Helmet } from "react-helmet-async";
-import Banner from "../Banner";
+import Banner from "../Banner/Banner";
 import { Link, useLocation } from "react-router-dom";
 
 const reducer = (state, action) => {
