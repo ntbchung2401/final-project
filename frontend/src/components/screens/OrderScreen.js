@@ -168,7 +168,8 @@ export default function OrderScreen() {
             <Helmet>
                 <title>Order {orderId}</title>
             </Helmet>
-            <h1 className="my-3">Order {orderId}</h1>
+            <h1 className="my-3">Order by {order.shippingAddress.fullName}</h1>
+            <h3 className="my-3">ID: {orderId}</h3>
             <Row>
                 <Col md={8}>
                     <Card className="mb-3">

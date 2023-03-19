@@ -12,6 +12,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Rating from '../Rating/Rating';
 import Product from '../Product';
 import { LinkContainer } from 'react-router-bootstrap';
+import SearchBox from '../SearchBox/SearchBox';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -132,6 +133,7 @@ export default function SearchScreen() {
                 <title>SearchScreen</title>
             </Helmet>
             <Row>
+            <SearchBox/>
                 <Col md={3}>
                     <h3>Department</h3>
                     <div>

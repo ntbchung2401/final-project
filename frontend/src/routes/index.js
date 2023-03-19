@@ -42,6 +42,7 @@ const privateRoutes = [
     { path: '/admin/userlist', component: UserListScreen, role: AdminRoute },
     { path: '/admin/user/:id', component: UserEditScreen, role: AdminRoute },
     { path: '/orderhistory', component: OrderHistoryScreen, role: ProtectedRoute },
+    { path: '/order/:id', component: OrderScreen, role: ProtectedRoute },
     { path: '/profile', component: ProfileScreen, role: ProtectedRoute },
 ];
 

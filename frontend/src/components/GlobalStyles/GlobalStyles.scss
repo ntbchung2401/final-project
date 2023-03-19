@@ -61,36 +61,6 @@ main {
 .small-container {
     max-width: 800px;
 }
-.navbar-brand {
-    font-weight: bold;
-    font-size: 80px;
-}
-.navbar {
-    height: 130px !important; /*i assume your navbar size 100px*/
-}
-.carousel-item {
-    background-position: center;
-}
-.navbar-brand {
-    font-weight: bold;
-}
-.side-navbar {
-    width: 240px;
-    height: 100%;
-    position: absolute;
-    left: -300px;
-    background-color: #100901;
-    transition: 0.5s;
-}
-.site-container {
-    transition: 0.4s;
-}
-.active-cont {
-    margin-left: 240px;
-}
-.active-nav {
-    left: 0;
-}
 .text-bold {
     font-weight: bold;
 }

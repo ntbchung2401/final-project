@@ -23,7 +23,7 @@ const reducer = (state, action) => {
                 errorUpload: '',
             };
         case 'CREATE_FAIL':
-            return { ...state, loadingCreate: false };
+            return { ...state, loadingCreate: false, errorUpload: action.payload };
         case 'UPLOAD_REQUEST':
             return { ...state, loadingUpload: true, errorUpload: '' };
         case 'UPLOAD_SUCCESS':
