@@ -9,6 +9,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Helmet } from 'react-helmet-async';
 import Banner from '../Banner/Banner';
 import Pagination from '../Pagination';
+import Category from '../Category';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -58,6 +59,12 @@ function HomeScreen() {
                 <title>ChungStore</title>
             </Helmet>
             <Banner />
+            <h1>Category:</h1>
+            <div className="main-contents">
+                <div className="layoutForCate">
+                    <Category />
+                </div>
+            </div>
             <h1>Features Product</h1>
             <div className="products">
                 {loading ? (

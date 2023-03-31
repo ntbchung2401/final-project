@@ -51,7 +51,13 @@ main {
     color: white;
     font-weight: bold;
 }
-
+.main-contents {
+    max-width: calc(100% - 20px);
+    margin: 0 auto;
+    @include md {
+        max-width: 1200px;
+    }
+}
 .img-large {
     max-width: 80%;
 }

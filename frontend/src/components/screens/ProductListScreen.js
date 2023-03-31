@@ -123,6 +123,7 @@ export default function ProductListScreen() {
                                 <th>PRICE</th>
                                 <th>CATEGORY</th>
                                 <th>BRAND</th>
+                                <th>QUANTITY</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -134,13 +135,22 @@ export default function ProductListScreen() {
                                     <td>{product.price}</td>
                                     <td>{product.category}</td>
                                     <td>{product.brand}</td>
+                                    <td>{product.counInStock}</td>
                                     <td>
                                         <Button
                                             type="button"
-                                            variant="info"
+                                            variant="success"
                                             onClick={() => navigate(`/admin/product/${product._id}`)}
                                         >
                                             Edit
+                                        </Button>
+                                        &nbsp;
+                                        <Button
+                                            type="button"
+                                            variant="info"
+                                            onClick={() => navigate(`/product/${product.display}`)}
+                                        >
+                                            Detail
                                         </Button>
                                         &nbsp;
                                         <Button type="button" variant="danger" onClick={() => deleteHandler(product)}>
