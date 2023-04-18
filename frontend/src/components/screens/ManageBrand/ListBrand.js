@@ -17,7 +17,7 @@ const reducer = (state, action) => {
         case 'FETCH_SUCCESS':
             return {
                 ...state,
-                categories: action.payload,
+                brands: action.payload,
                 loading: false,
             };
         case 'DELETE_REQUEST':
@@ -40,8 +40,8 @@ const reducer = (state, action) => {
     }
 };
 
-export default function ManageCategory() {
-    const [{ loading, error, categories, loadingCreate, loadingDelete, successDelete }, dispatch] = useReducer(
+export default function ManageBrand() {
+    const [{ loading, error, brands, loadingCreate, loadingDelete, successDelete }, dispatch] = useReducer(
         reducer,
         {
             loading: true,
@@ -56,7 +56,7 @@ export default function ManageCategory() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data } = await axios.get(`/api/categories`, {
+                const { data } = await axios.get(`/api/brands`, {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 });
 
@@ -70,10 +70,10 @@ export default function ManageCategory() {
         }
     }, [ userInfo, successDelete]);
 
-    const deleteHandler = async (category) => {
+    const deleteHandler = async (brand) => {
         if (window.confirm('Are you sure to delete?')) {
             try {
-                await axios.delete(`/api/categories/${category._id}`, {
+                await axios.delete(`/api/brands/${brand._id}`, {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 });
                 toast.success('Category deleted successfully');
@@ -90,12 +90,12 @@ export default function ManageCategory() {
         <div>
             <Row>
                 <Col>
-                    <h1>List of Categories</h1>
+                    <h1>List of Brands</h1>
                 </Col>
                 <Col className="col text-end">
                     <div>
-                        <Link to="/admin/createCategory">
-                            <Button>Create Category</Button>
+                        <Link to="/admin/createBrand">
+                            <Button>Create Brand</Button>
                         </Link>
                     </div>
                 </Col>
@@ -113,27 +113,27 @@ export default function ManageCategory() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Brand</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {categories.map((category) => (
-                                <tr key={category._id}>
-                                    <td>{category._id}</td>
-                                    <td>{category.name}</td>
-                                    <td>{category.description}</td>
+                            {brands.map((brand) => (
+                                <tr key={brand._id}>
+                                    <td>{brand._id}</td>
+                                    <td>{brand.brand}</td>
+                                    <td>{brand.description}</td>
                                     <td>
                                         <Button
                                             type="button"
                                             variant="success"
-                                            onClick={() => navigate(`/admin/categories/${category._id}`)}
+                                            onClick={() => navigate(`/admin/brands/${brand._id}`)}
                                         >
                                             Edit
                                         </Button>
                                         &nbsp;
-                                        <Button type="button" variant="danger" onClick={() => deleteHandler(category)}>
+                                        <Button type="button" variant="danger" onClick={() => deleteHandler(brand)}>
                                             Delete
                                         </Button>
                                     </td>

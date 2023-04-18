@@ -7,6 +7,7 @@ import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
+import brandRouter from "./routes/brandRoutes.js";
 
 dotenv.config();
 mongoose.set("strictQuery", false);
@@ -31,7 +32,7 @@ app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/categories", categoryRouter);
-
+app.use("/api/brands", brandRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

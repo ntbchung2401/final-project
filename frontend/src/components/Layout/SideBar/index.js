@@ -37,6 +37,16 @@ export default function SideBar({ setShowSideBar }) {
             icon: <FaUserAlt />,
         },
         {
+            path: '/admin/manageCategory',
+            name: 'Manage Category',
+            icon: <FaThList />,
+        },
+        {
+            path: '/admin/manageBrand',
+            name: 'Manage Brand',
+            icon: <FaThList />,
+        },
+        {
             path: '/admin/orderlist',
             name: 'Manage Order',
             icon: <FaShoppingBag />,

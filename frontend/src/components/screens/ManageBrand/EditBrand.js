@@ -30,7 +30,7 @@ const reducer = (state, action) => {
     }
 };
 
-export default function EditCategory() {
+export default function EditBrand() {
     const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
         loading: true,
         error: '',
@@ -40,20 +40,19 @@ export default function EditCategory() {
     const { userInfo } = state;
 
     const params = useParams();
-    const { id: categoryId } = params;
+    const { id: brandId } = params;
     const navigate = useNavigate();
-
-    const [name, setName] = useState('');
+    const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 dispatch({ type: 'FETCH_REQUEST' });
-                const { data } = await axios.get(`/api/categories/${categoryId}`, {
+                const { data } = await axios.get(`/api/brands/${brandId}`, {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 });
-                setName(data.name);
+                setBrand(data.brand);
                 setDescription(data.description);
                 dispatch({ type: 'FETCH_SUCCESS' });
             } catch (err) {
@@ -64,15 +63,15 @@ export default function EditCategory() {
             }
         };
         fetchData();
-    }, [categoryId, userInfo]);
+    }, [brandId, userInfo]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
             dispatch({ type: 'UPDATE_REQUEST' });
             await axios.put(
-                `/api/categories/${categoryId}`,
-                { _id: categoryId, name, description },
+                `/api/brands/${brandId}`,
+                { _id: brandId, brand, description },
                 {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 },
@@ -81,7 +80,7 @@ export default function EditCategory() {
                 type: 'UPDATE_SUCCESS',
             });
             toast.success('User updated successfully');
-            navigate('/admin/manageCategory');
+            navigate('/admin/manageBrand');
         } catch (error) {
             toast.error(getError(error));
             dispatch({ type: 'UPDATE_FAIL' });
@@ -90,9 +89,9 @@ export default function EditCategory() {
     return (
         <Container className="small-container">
             <Helmet>
-                <title>Edit Category: {name}</title>
+                <title>Edit Brand: {brand}</title>
             </Helmet>
-            <h1>Edit Category: {name}</h1>
+            <h1>Edit Brand: {brand}</h1>
 
             {loading ? (
                 <LoadingSpinner></LoadingSpinner>
@@ -100,9 +99,9 @@ export default function EditCategory() {
                 <ErrorMessage variant="danger">{error}</ErrorMessage>
             ) : (
                 <Form onSubmit={submitHandler}>
-                    <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Category name</Form.Label>
-                        <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
+                    <Form.Group className="mb-3" controlId="brand">
+                        <Form.Label>Brand name</Form.Label>
+                        <Form.Control value={brand} onChange={(e) => setBrand(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="description">
                         <Form.Label>Description</Form.Label>

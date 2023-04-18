@@ -3,7 +3,7 @@ import logger from 'use-reducer-logger';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Product from '../Product';
+import Product from '../CardProduct/Product';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { Helmet } from 'react-helmet-async';

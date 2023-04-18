@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import Button from 'react-bootstrap/Button';
-import { getError } from '../../getError';
-import { Shop } from '../../Shop';
+import { Shop } from '~/Shop';
+import { getError } from '~/getError';
+import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '~/components/ErrorMessage/ErrorMessage';
 import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {

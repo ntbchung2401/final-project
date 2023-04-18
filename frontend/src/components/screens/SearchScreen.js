@@ -10,7 +10,7 @@ import { getError } from '../../getError';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Rating from '../Rating/Rating';
-import Product from '../Product';
+import Product from '../CardProduct/Product';
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchBox from '../SearchBox/SearchBox';
 
@@ -133,7 +133,7 @@ export default function SearchScreen() {
                 <title>SearchScreen</title>
             </Helmet>
             <Row>
-            <SearchBox/>
+                <SearchBox />
                 <Col md={3}>
                     <h3>Department</h3>
                     <div>
