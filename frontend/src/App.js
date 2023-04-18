@@ -2,14 +2,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import { privateRoutes, publicRoutes } from './routes';
 import Container from 'react-bootstrap/Container';
-import { ToastContainer } from 'react-bootstrap';
+// import { ToastContainer } from 'react-bootstrap';
 // import Header from './components/Header';
 import Header from './components/Layout/Header';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
         <Router>
-            <ToastContainer position="bottom-center" limit={1} />
+            <ToastContainer position="top-right" limit={1} />
             {/* <Header /> */}
             <Header />
             <Container className="mt-3">
