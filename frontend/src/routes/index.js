@@ -7,6 +7,9 @@ import DashboardScreen from '~/components/screens/DashboardScreen';
 import ProductEditScreen from '~/components/screens/EditProductScreen';
 import HomeScreen from '~/components/screens/HomeScreen';
 import LoginScreen from '~/components/screens/LoginScreen';
+import CreateCategoryScreen from '~/components/screens/ManageCategory/CreateCategory';
+import EditCategory from '~/components/screens/ManageCategory/EditCategory';
+import ManageCategory from '~/components/screens/ManageCategory/ListCategory';
 import OrderHistoryScreen from '~/components/screens/OrderHistoryScreen';
 import OrderListScreen from '~/components/screens/OrderListScreen';
 import OrderScreen from '~/components/screens/OrderScreen';
@@ -37,8 +40,13 @@ const privateRoutes = [
     { path: '/admin/dashboard', component: DashboardScreen, role: AdminRoute },
     { path: '/admin/product/:id', component: ProductEditScreen, role: AdminRoute },
     { path: '/admin/createproduct', component: CreateProductScreen, role: AdminRoute },
+    { path: '/admin/createCategory', component: CreateCategoryScreen, role: AdminRoute },
+    { path: '/admin/manageCategory', component: ManageCategory, role: AdminRoute },
     { path: '/admin/productlist', component: ProductListScreen, role: AdminRoute },
+
+
     { path: '/admin/order/:id', component: OrderScreen, role: AdminRoute },
+    { path: '/admin/categories/:id', component: EditCategory, role: AdminRoute },
     { path: '/admin/orderlist', component: OrderListScreen, role: AdminRoute },
     { path: '/admin/userlist', component: UserListScreen, role: AdminRoute },
     { path: '/admin/user/:id', component: UserEditScreen, role: AdminRoute },

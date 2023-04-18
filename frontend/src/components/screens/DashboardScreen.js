@@ -125,6 +125,23 @@ export default function DashboardScreen() {
                             ></Chart>
                         )}
                     </div>
+                    <div className="my-3">
+                        <h2>Brands</h2>
+                        {summary.productBrands.length === 0 ? (
+                            <ErrorMessage>No Brand</ErrorMessage>
+                        ) : (
+                            <Chart
+                                width="100%"
+                                height="400px"
+                                chartType="PieChart"
+                                loader={<div>Loading Chart...</div>}
+                                data={[
+                                    ['Brand', 'Products'],
+                                    ...summary.productBrands.map((x) => [x._id, x.count]),
+                                ]}
+                            ></Chart>
+                        )}
+                    </div>
                 </>
             )}
         </div>

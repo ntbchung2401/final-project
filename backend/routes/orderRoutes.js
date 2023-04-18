@@ -76,7 +76,15 @@ orderRouter.get(
         },
       },
     ]);
-    res.send({ users, orders, dailyOrders, productCategories });
+    const productBrands = await Product.aggregate([
+      {
+        $group: {
+          _id: "$brand",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    res.send({ users, orders, dailyOrders, productCategories,productBrands });
   })
 );
 orderRouter.get(
