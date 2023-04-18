@@ -1,41 +1,49 @@
+import Axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
 import { useContext, useEffect, useState } from 'react';
-import Axios from 'axios';
-import { Shop } from '../../Shop';
 import { toast } from 'react-toastify';
-import { getError } from '../../getError';
+import { Shop } from '../../../Shop';
+import { getError } from '../../../getError';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
     const navigate = useNavigate();
     const { search } = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect');
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     const { state, dispatch: ctxDispatch } = useContext(Shop);
     const { userInfo } = state;
-
     const submitHandler = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
         try {
-            const { data } = await Axios.post('/api/users/login', {
+            const { data } = await Axios.post('/api/users/register', {
+                name,
                 email,
                 password,
             });
             ctxDispatch({ type: 'USER_SIGNIN', payload: data });
             localStorage.setItem('userInfo', JSON.stringify(data));
-            data.isAdmin ? navigate('/admin/dashboard') : navigate(redirect || '/');
+            navigate(redirect || '/');
         } catch (err) {
             toast.error(getError(err));
         }
     };
+
     useEffect(() => {
         if (userInfo) {
             navigate(redirect);
@@ -45,12 +53,17 @@ export default function LoginScreen() {
     return (
         <Container>
             <Helmet>
-                <title>Sign In</title>
+                <title>Register</title>
             </Helmet>
             <Row>
-                <Col md={6} className="login_form_container">
-                    <h1 className="my-3">Sign In</h1>
+                <Col md={6} className="register_form_container">
+                    <h1 className="my-3">Register</h1>
                     <Form style={{ width: '80%' }} onSubmit={submitHandler}>
+                        <Form.Group className="mb-3" controlId="name">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control onChange={(e) => setName(e.target.value)} required />
+                        </Form.Group>
+
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
@@ -58,12 +71,20 @@ export default function LoginScreen() {
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Group className="mb-3" controlId="confirmPassword">
+                                <Form.Label>Confirm Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
                         </Form.Group>
                         <div className="mb-3">
-                            <Button type="submit">Sign In</Button>
+                            <Button type="submit">Register</Button>
                         </div>
                         <div className="mb-3">
-                            New customer? <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                            Already have an account? <Link to={`/login?redirect=${redirect}`}>Log-in</Link>
                         </div>
                     </Form>
                 </Col>

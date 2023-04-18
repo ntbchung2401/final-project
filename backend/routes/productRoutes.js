@@ -23,7 +23,7 @@ productRouter.post(
       price: req.body.price,
       category: req.body.category,
       brand: req.body.brand,
-      counInStock: req.body.counInStock,
+      counInStock: 0,
       rating: 0,
       numReviews: 0,
       description: req.body.description,

@@ -3,13 +3,13 @@ import logger from 'use-reducer-logger';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Product from '../CardProduct/Product';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Product from '../../CardProduct/Product';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import { Helmet } from 'react-helmet-async';
-import Banner from '../Banner/Banner';
-import Pagination from '../Pagination';
-import Category from '../Category';
+import Banner from '../../Banner/Banner';
+import Pagination from '../../Pagination';
+import Category from '../../Category';
 
 const reducer = (state, action) => {
     switch (action.type) {

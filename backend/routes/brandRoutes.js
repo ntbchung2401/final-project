@@ -8,8 +8,6 @@ const brandRouter = express.Router();
 
 brandRouter.get(
   "/",
-  isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const brands = await Brand.find({});
     res.send(brands);

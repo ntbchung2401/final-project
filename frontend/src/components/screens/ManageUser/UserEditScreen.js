@@ -6,10 +6,10 @@ import Container from 'react-bootstrap/Container';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Shop } from '../../Shop';
-import { getError } from '../../getError';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { Shop } from '../../../Shop';
+import { getError } from '../../../getError';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 const reducer = (state, action) => {
     switch (action.type) {

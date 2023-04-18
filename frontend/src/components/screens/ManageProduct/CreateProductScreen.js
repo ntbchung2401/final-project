@@ -57,6 +57,29 @@ export default function CreateProductScreen() {
     const [counInStock, setcounInStock] = useState('');
     const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
+    const [brands, setBrands] = useState([]);
+    const [cate, setCate] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('/api/brands')
+            .then((response) => {
+                setBrands(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    useEffect(() => {
+        axios
+            .get('/api/categories')
+            .then((response) => {
+                setCate(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const createHandler = async (e) => {
         try {
@@ -65,14 +88,12 @@ export default function CreateProductScreen() {
             const { data } = await axios.post(
                 '/api/products',
                 {
-                    // productId,
                     name,
                     display,
                     price,
                     image,
                     category,
                     brand,
-                    counInStock,
                     description,
                 },
                 {
@@ -127,33 +148,47 @@ export default function CreateProductScreen() {
                     <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="display">
-                    <Form.Label>Display</Form.Label>
+                    <Form.Label>Tag</Form.Label>
                     <Form.Control value={display} onChange={(e) => setDisplay(e.target.value)} required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Price</Form.Label>
                     <Form.Control value={price} onChange={(e) => setPrice(e.target.value)} required />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="imageFile">
-                    <Form.Label>Upload File</Form.Label>
-                    <Form.Control type="file" onChange={uploadFileHandler} />
-                    {loadingUpload && <LoadingSpinner></LoadingSpinner>}
-                </Form.Group>
                 <Form.Group className="mb-3" controlId="category">
                     <Form.Label>Category</Form.Label>
-                    <Form.Control value={category} onChange={(e) => setCategory(e.target.value)} required />
+                    <Form.Select value={category} required onChange={(e) => setCategory(e.target.value)}>
+                        <option value="">-----Select a Category------</option>
+                        {cate.map((cate, index) => {
+                            return (
+                                <option key={index} value={cate.name}>
+                                    {cate.name}
+                                </option>
+                            );
+                        })}
+                    </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="brand">
                     <Form.Label>Brand</Form.Label>
-                    <Form.Control value={brand} onChange={(e) => setBrand(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="counInStock">
-                    <Form.Label>Count In Stock</Form.Label>
-                    <Form.Control value={counInStock} onChange={(e) => setcounInStock(e.target.value)} required />
+                    <Form.Select value={brand} required onChange={(e) => setBrand(e.target.value)}>
+                        <option value="">-----Select a Brand------</option>
+                        {brands.map((brands, index) => {
+                            return (
+                                <option key={index} value={brands.brand}>
+                                    {brands.brand}
+                                </option>
+                            );
+                        })}
+                    </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control value={description} onChange={(e) => setDescription(e.target.value)} required />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="imageFile">
+                    <Form.Label>Product Image</Form.Label>
+                    <Form.Control type="file" onChange={uploadFileHandler} />
+                    {loadingUpload && <LoadingSpinner></LoadingSpinner>}
                 </Form.Group>
                 <div className="mb-3">
                     <Button

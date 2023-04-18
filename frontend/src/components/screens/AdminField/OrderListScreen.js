@@ -5,10 +5,10 @@ import Badge from 'react-bootstrap/Badge';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getError } from '../../getError';
-import { Shop } from '../../Shop';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { getError } from '../../../getError';
+import { Shop } from '../../../Shop';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 const reducer = (state, action) => {
     switch (action.type) {

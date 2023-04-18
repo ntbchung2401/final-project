@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import Chart from 'react-google-charts';
 import axios from 'axios';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { Shop } from '../../Shop';
-import { getError } from '../../getError';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import { Shop } from '../../../Shop';
+import { getError } from '../../../getError';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -135,10 +135,7 @@ export default function DashboardScreen() {
                                 height="400px"
                                 chartType="PieChart"
                                 loader={<div>Loading Chart...</div>}
-                                data={[
-                                    ['Brand', 'Products'],
-                                    ...summary.productBrands.map((x) => [x._id, x.count]),
-                                ]}
+                                data={[['Brand', 'Products'], ...summary.productBrands.map((x) => [x._id, x.count])]}
                             ></Chart>
                         )}
                     </div>
