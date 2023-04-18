@@ -84,6 +84,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
+          avatar: user.avatar,
           token: generateToken(user),
         });
         return;
@@ -107,13 +108,13 @@ userRouter.post(
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      avatar: user.avatar,
       token: generateToken(user),
     });
   })
 );
 userRouter.put(
   "/profile",
-  isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
@@ -122,7 +123,6 @@ userRouter.put(
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
-
       const updatedUser = await user.save();
       res.send({
         _id: updatedUser._id,

@@ -9,6 +9,7 @@ export default function Category() {
             <div className={cx('categories')}>
                 <div className={cx('category')}>
                     <img src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679260599/caps_2_ptbnko.jpg" alt="" />
+                    <span style={{ color: 'white', alignItems: 'center',justifyContent: 'center' }}>Jean</span>{' '}
                 </div>
                 <div className={cx('category')}>
                     <img

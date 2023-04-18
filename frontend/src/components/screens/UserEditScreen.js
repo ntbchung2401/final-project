@@ -83,7 +83,7 @@ export default function UserEditScreen() {
                 type: 'UPDATE_SUCCESS',
             });
             toast.success('User updated successfully');
-            navigate('/admin/users');
+            navigate('/admin/userlist');
         } catch (error) {
             toast.error(getError(error));
             dispatch({ type: 'UPDATE_FAIL' });
@@ -92,9 +92,9 @@ export default function UserEditScreen() {
     return (
         <Container className="small-container">
             <Helmet>
-                <title>Edit User ${userId}</title>
+                <title>Edit User: {name}</title>
             </Helmet>
-            <h1>Edit User {userId}</h1>
+            <h1>Edit user: {name}</h1>
 
             {loading ? (
                 <LoadingSpinner></LoadingSpinner>
@@ -103,14 +103,14 @@ export default function UserEditScreen() {
             ) : (
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>User name</Form.Label>
                         <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="email">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label>Email Login</Form.Label>
                         <Form.Control value={email} type="email" onChange={(e) => setEmail(e.target.value)} required />
                     </Form.Group>
-
+                    <Form.Label>Role</Form.Label>
                     <Form.Check
                         className="mb-3"
                         type="checkbox"
