@@ -6,41 +6,44 @@ import Container from 'react-bootstrap/Container';
 // import Header from './components/Header';
 import Header from './components/Layout/Header';
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
-        <Router>
-            <ToastContainer position="top-right" limit={1} />
-            {/* <Header /> */}
-            <Header />
-            <Container className="mt-3">
-                <Routes>
-                    {privateRoutes.map((route, index) => {
-                        const Page = route.component;
-                        const Auth = route.role;
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
-                                    <Auth>
-                                        <Page />
-                                    </Auth>
-                                }
-                            />
-                        );
-                    })}
-                </Routes>
-                <Routes>
-                    {publicRoutes.map((route, index) => {
-                        const Page = route.component;
-                        return <Route key={index} path={route.path} element={<Page />} />;
-                    })}
-                </Routes>
-            </Container>
-            <Footer />
-        </Router>
+        <>
+            <Router>
+                <ToastContainer position="top-right" limit={1} />
+                {/* <Header /> */}
+
+                <Header />
+                <Container className="mt-3">
+                    <Routes>
+                        {privateRoutes.map((route, index) => {
+                            const Page = route.component;
+                            const Auth = route.role;
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Auth>
+                                            <Page />
+                                        </Auth>
+                                    }
+                                />
+                            );
+                        })}
+                    </Routes>
+                    <Routes>
+                        {publicRoutes.map((route, index) => {
+                            const Page = route.component;
+                            return <Route key={index} path={route.path} element={<Page />} />;
+                        })}
+                    </Routes>
+                </Container>
+                <Footer />
+            </Router>
+        </>
     );
 }
 export default App;

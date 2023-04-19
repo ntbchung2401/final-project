@@ -7,11 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import CheckoutSteps from '../CheckoutSteps/CheckoutSteps';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import { Shop } from '../../Shop';
+import CheckoutSteps from '../../CheckoutSteps/CheckoutSteps';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import { Shop } from '../../../Shop';
 import { toast } from 'react-toastify';
-import { getError } from '../../getError';
+import { getError } from '../../../getError';
 
 export default function PreviewOrderScreen() {
     const reducer = (state, action) => {

@@ -7,6 +7,7 @@ import { getError } from '../../../getError';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import Button from 'react-bootstrap/esm/Button';
+import Footer from '../../Footer/Footer.jsx'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -96,6 +97,7 @@ export default function OrderHistoryScreen() {
                     </tbody>
                 </table>
             )}
+
         </div>
     );
 }

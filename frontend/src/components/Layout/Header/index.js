@@ -29,7 +29,10 @@ export default function Header() {
     };
     return (
         <>
-            <header className={cx('main-header')}>
+        <div
+                        // style={{ position: 'absolute', width: '100%', height: '15%', right: '0', top: '0', left: '0' }}
+                    >
+            <header className={cx('main-header')} >
                 <div className={cx('header-content')}>
                     <ul className={cx('left')}>
                         <li>
@@ -96,6 +99,7 @@ export default function Header() {
                 </div>
             </header>
             {showSideBar && <SideBar setShowSideBar={setShowSideBar} />}
+            </div>
         </>
     );
 }

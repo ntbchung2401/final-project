@@ -6,13 +6,13 @@ import Row from 'react-bootstrap/Row';
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getError } from '../../getError';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import Rating from '../Rating/Rating';
-import Product from '../CardProduct/Product';
+import { getError } from '../../../getError';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import Rating from '../../Rating/Rating';
+import Product from '../../CardProduct/Product';
 import { LinkContainer } from 'react-router-bootstrap';
-import SearchBox from '../SearchBox/SearchBox';
+import SearchBox from '../../SearchBox/SearchBox';
 
 const reducer = (state, action) => {
     switch (action.type) {

@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import CheckoutSteps from '../CheckoutSteps/CheckoutSteps';
-import { Shop } from '../../Shop';
+import CheckoutSteps from '../../CheckoutSteps/CheckoutSteps';
+import { Shop } from '../../../Shop';
 
 export default function AddressScreen() {
     const navigate = useNavigate();

@@ -3,16 +3,16 @@ import axios from 'axios';
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Rating from '../Rating/Rating';
+import Rating from '../../Rating/Rating';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { Helmet } from 'react-helmet-async';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { getError } from '../../getError';
-import { Shop } from '../../Shop';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import { getError } from '../../../getError';
+import { Shop } from '../../../Shop';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 import { Form } from 'react-bootstrap';
@@ -81,7 +81,7 @@ function ProductScreen() {
         });
         navigate('/cart');
     };
-    const submitHandler = async (e) => {
+    const submitHandler = async (e) => {   
         e.preventDefault();
         if (!comment || !rating) {
             toast.error('Please enter comment and rating');

@@ -1,6 +1,10 @@
 @import '../../../components/GlobalStyles/mixins.scss';
 
 .main-header {
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     padding: 0 20px;
     height: 90px;
