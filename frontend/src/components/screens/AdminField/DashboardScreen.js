@@ -95,7 +95,7 @@ export default function DashboardScreen() {
                         </Col>
                     </Row>
                     <div className="my-3">
-                        <h2>Sales</h2>
+                        <h2>Total Sales</h2>
                         {summary.dailyOrders.length === 0 ? (
                             <ErrorMessage>No Sale</ErrorMessage>
                         ) : (
@@ -105,6 +105,20 @@ export default function DashboardScreen() {
                                 chartType="AreaChart"
                                 loader={<div>Loading Chart...</div>}
                                 data={[['Date', 'Sales'], ...summary.dailyOrders.map((x) => [x._id, x.sales])]}
+                            ></Chart>
+                        )}
+                    </div>
+                    <div className="my-3">
+                        <h2>30 Day Recent Sales</h2>
+                        {summary.monthsOrders.length === 0 ? (
+                            <ErrorMessage>No Sale</ErrorMessage>
+                        ) : (
+                            <Chart
+                                width="100%"
+                                height="400px"
+                                chartType="AreaChart"
+                                loader={<div>Loading Chart...</div>}
+                                data={[['Date', 'Sales'], ...summary.monthsOrders.map((x) => [x._id, x.sales])]}
                             ></Chart>
                         )}
                     </div>

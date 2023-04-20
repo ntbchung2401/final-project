@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { getError } from '../../../getError';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { FaEnvelope, FaEyeSlash, FaTimes, FaEye } from 'react-icons/fa';
+import { InputGroup } from 'react-bootstrap';
 
 export default function LoginScreen() {
     const navigate = useNavigate();
@@ -21,6 +23,10 @@ export default function LoginScreen() {
     const [password, setPassword] = useState('');
     const { state, dispatch: ctxDispatch } = useContext(Shop);
     const { userInfo } = state;
+    const clearEmail = () => {
+        setEmail('');
+    };
+    const [showPassword, setShowPassword] = useState(false);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -53,11 +59,37 @@ export default function LoginScreen() {
                     <Form style={{ width: '80%' }} onSubmit={submitHandler}>
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
+                            <div className="input-group">
+                                <Form.Control
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                {email && (
+                                    <Button variant="light" onClick={clearEmail}>
+                                        <FaTimes />
+                                    </Button>
+                                )}
+                            </div>
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
+                            <InputGroup>
+                                <Form.Control
+                                    type={showPassword ? 'text' : 'password'}
+                                    required
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    tabIndex="-1"
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </Button>
+                            </InputGroup>
                         </Form.Group>
                         <div className="mb-3">
                             <Button type="submit">Sign In</Button>

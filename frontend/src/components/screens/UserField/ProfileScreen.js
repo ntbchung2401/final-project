@@ -36,8 +36,9 @@ export default function ProfileScreen() {
         e.preventDefault();
         try {
             const { data } = await axios.put(
-                '/api/users/profile',
+                `/api/users/update-profile`,
                 {
+                    _id: userInfo._id,
                     name,
                     email,
                     password,
@@ -59,6 +60,7 @@ export default function ProfileScreen() {
             toast.error(getError(err));
         }
     };
+    
 
     return (
         <div className="container small-container">

@@ -68,6 +68,24 @@ orderRouter.get(
       },
       { $sort: { _id: 1 } },
     ]);
+    const start = new Date();
+start.setDate(start.getDate() - 30);
+
+const monthsOrders = await Order.aggregate([
+  {
+    $match: {
+      createdAt: { $gte: start },
+    },
+  },
+  {
+    $group: {
+      _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+      orders: { $sum: 1 },
+      sales: { $sum: "$totalPrice" },
+    },
+  },
+  { $sort: { _id: 1 } },
+]);
     const productCategories = await Product.aggregate([
       {
         $group: {
@@ -84,7 +102,7 @@ orderRouter.get(
         },
       },
     ]);
-    res.send({ users, orders, dailyOrders, productCategories,productBrands });
+    res.send({ users, orders, dailyOrders, productCategories,productBrands,monthsOrders });
   })
 );
 orderRouter.get(

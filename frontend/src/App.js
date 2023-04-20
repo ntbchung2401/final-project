@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Header from './components/Layout/Header';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import "~/components/GlobalStyles/index.js"
 function App() {
     return (
         <>
@@ -41,7 +41,9 @@ function App() {
                         })}
                     </Routes>
                 </Container>
+                <footer className='footer'>
                 <Footer />
+                </footer>
             </Router>
         </>
     );
