@@ -1,19 +1,19 @@
 @import '../GlobalStyles/mixins.scss';
 
-.shop-by-category {
+.shop-by-brand {
     margin: 25px 0;
 
     @include md {
         margin: 30px 0;
     }
 
-    .categoriesList {
+    .brandList {
         position: relative;
         display: flex;
         flex-flow: wrap;
         gap: 10px;
 
-        .eachCategory {
+        .eachBrand {
             background-color: black;
             width: calc(50% - 5px);
             cursor: pointer;

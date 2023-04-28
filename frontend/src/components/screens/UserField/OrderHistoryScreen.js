@@ -7,7 +7,7 @@ import { getError } from '../../../getError';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import Button from 'react-bootstrap/esm/Button';
-import Footer from '../../Footer/Footer.jsx'
+import Footer from '../../Footer/Footer.jsx';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -56,7 +56,7 @@ export default function OrderHistoryScreen() {
                 <title>Order History</title>
             </Helmet>
 
-            <h1>Order History</h1>
+            <h1>Order History of {userInfo.name}</h1>
             {loading ? (
                 <LoadingSpinner></LoadingSpinner>
             ) : error ? (
@@ -66,17 +66,30 @@ export default function OrderHistoryScreen() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>DATE</th>
-                            <th>TOTAL</th>
-                            <th>PAID</th>
-                            <th>DELIVERED</th>
-                            <th>ACTIONS</th>
+                            <th>Items</th>
+                            <th>Order At</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>Delivered</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders.map((order) => (
                             <tr key={order._id}>
                                 <td>{order._id}</td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            {order.orderItems.map((item) => (
+                                                <tr key={item._id}>
+                                                    <td style={{ padding: '0 5px' }}><strong>{item.quantity}</strong></td>
+                                                    <td style={{ padding: '0 5px' }}>{item.name}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>{order.totalPrice.toFixed(2)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
@@ -97,7 +110,6 @@ export default function OrderHistoryScreen() {
                     </tbody>
                 </table>
             )}
-
         </div>
     );
 }
