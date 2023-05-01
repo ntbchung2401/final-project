@@ -15,8 +15,8 @@ productRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    // Create a new Product instance with the provided data
     const newProduct = new Product({
-      // _id : req.body._id,
       name: req.body.name,
       display: req.body.display,
       image: req.body.image,
@@ -28,8 +28,12 @@ productRouter.post(
       numReviews: 0,
       description: req.body.description,
     });
+
+    // Save the new product in the database
     const product = await newProduct.save();
-    res.send({
+
+    // Send the response back to the client
+    res.status(201).send({
       _id: product._id,
       name: product.name,
       display: product.display,
@@ -42,7 +46,6 @@ productRouter.post(
       numReviews: product.numReviews,
       description: product.description,
     });
-    res.status(201).send({ message: "New Product Created", product });
   })
 );
 
@@ -74,11 +77,17 @@ productRouter.delete(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    // Find the product by ID
     const product = await Product.findById(req.params.id);
+
     if (product) {
+      // Delete the product from the database
       await product.deleteOne();
+
+      // Send the response back to the client
       res.send({ message: "Product Deleted" });
     } else {
+      // If the product is not found, send a 404 status code and an error message
       res.status(404).send({ message: "Product Not Found" });
     }
   })
@@ -153,6 +162,7 @@ productRouter.get(
     const order = query.order || "";
     const searchQuery = query.query || "";
 
+    // Apply filters based on query parameters
     const queryFilter =
       searchQuery && searchQuery !== "all"
         ? {
@@ -174,13 +184,14 @@ productRouter.get(
     const priceFilter =
       price && price !== "all"
         ? {
-            // 1-50
             price: {
               $gte: Number(price.split("-")[0]),
               $lte: Number(price.split("-")[1]),
             },
           }
         : {};
+
+    // Determine sorting order
     const sortOrder =
       order === "featured"
         ? { featured: -1 }
@@ -194,6 +205,7 @@ productRouter.get(
         ? { createdAt: -1 }
         : { _id: -1 };
 
+    // Fetch products based on filters, sorting, pagination
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
@@ -204,12 +216,15 @@ productRouter.get(
       .skip(pageSize * (page - 1))
       .limit(pageSize);
 
+    // Count total number of products matching the filters
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
+
+    // Send the response with products, pagination details
     res.send({
       products,
       countProducts,
@@ -218,6 +233,7 @@ productRouter.get(
     });
   })
 );
+
 productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {

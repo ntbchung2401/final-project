@@ -8,29 +8,30 @@ export default function Brand() {
         <div className={cx('shop-by-brand')}>
             <div className={cx('brandList')}>
                 <div className={cx('eachBrand')}>
-                    <img src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679260599/caps_2_ptbnko.jpg" alt="" />
+                    <img src="https://www.celeb.vn/wp-content/uploads/2021/08/5theway.jpg" alt="" />
                     <button className={cx('btnShop')}>5TheWay</button>
                 </div>
+                
                 <div className={cx('eachBrand')}>
                     <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1678821247/uyyswcxgmei6lzgkmg0l.jpg"
-                        alt=""
-                    />
-                    <button className={cx('btnShop')}>NowSaiGon</button>
-                </div>
-                <div className={cx('eachBrand')}>
-                    <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679259755/336159867_1139905727406412_4418065257545517045_n_kgj0pi.png"
+                        src="https://employer.jobsgo.vn/uploads/media/img/201805/pictures_library_van-thuc_9247_180502094537_6369.png"
                         alt=""
                     />
                     <button className={cx('btnShop')}>K300</button>
                 </div>
                 <div className={cx('eachBrand')}>
                     <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679260219/jacket-men_aeedjl.webp"
+                        src="https://bizweb.dktcdn.net/100/318/614/products/wuntitled-14-04-2.jpg?v=1609153887910"
                         alt=""
                     />
-                    <button className={cx('btnShop')}>Hades</button>
+                    <button className={cx('btnShop')}>Now Saigon</button>
+                </div>
+                <div className={cx('eachBrand')}>
+                    <img
+                        src="https://localbrand.vn/wp-content/uploads/2020/04/Logo-HADES.jpg"
+                        alt=""
+                    />
+                    <button className={cx('btnShop')}>Hades Studio</button>
                 </div>
             </div>
         </div>

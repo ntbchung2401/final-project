@@ -37,7 +37,7 @@ const publicRoutes = [
     { path: '/payment', component: PaymentScreen },
     { path: '/previeworder', component: PreviewOrderScreen },
     { path: '/search', component: SearchScreen },
-    { path: '/profile', component: ProfileScreen },
+    
 ];
 const privateRoutes = [
     { path: '/admin/dashboard', component: DashboardScreen, role: AdminRoute },
@@ -58,7 +58,7 @@ const privateRoutes = [
     { path: '/admin/user/:id', component: UserEditScreen, role: AdminRoute },
     { path: '/orderhistory', component: OrderHistoryScreen, role: ProtectedRoute },
     { path: '/order/:id', component: OrderScreen, role: ProtectedRoute },
-    // { path: '/profile', component: ProfileScreen, role: ProtectedRoute },
+    { path: '/profile', component: ProfileScreen, role: ProtectedRoute },
 ];
 
 export { publicRoutes, privateRoutes };

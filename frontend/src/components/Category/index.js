@@ -8,26 +8,26 @@ export default function Category() {
         <div className={cx('shop-by-category')}>
             <div className={cx('categoriesList')}>
                 <div className={cx('eachCategory')}>
-                    <img src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679260599/caps_2_ptbnko.jpg" alt="" />
+                    <img src="https://bizweb.dktcdn.net/100/438/408/products/qjm5033-xah3.jpg?v=1677141996487" alt="" />
                     <button className={cx('btnShop')}>Jeans</button>
                 </div>
                 <div className={cx('eachCategory')}>
                     <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1678821247/uyyswcxgmei6lzgkmg0l.jpg"
+                        src="https://bizweb.dktcdn.net/100/438/408/products/akm4027-xah-qjm3077-xde-4.jpg?v=1660188596320"
                         alt=""
                     />
                     <button className={cx('btnShop')}>Jacket</button>
                 </div>
                 <div className={cx('eachCategory')}>
                     <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679259755/336159867_1139905727406412_4418065257545517045_n_kgj0pi.png"
+                        src="https://bizweb.dktcdn.net/100/438/408/products/atm5095-cba-7.jpg?v=1668563064037"
                         alt=""
                     />
-                    <button className={cx('btnShop')}>Hoodies</button>
+                    <button className={cx('btnShop')}>Sweater</button>
                 </div>
                 <div className={cx('eachCategory')}>
                     <img
-                        src="https://res.cloudinary.com/dshdorhq9/image/upload/v1679260219/jacket-men_aeedjl.webp"
+                        src="https://bizweb.dktcdn.net/100/438/408/products/qkm5027-den-20.jpg?v=1675498036550"
                         alt=""
                     />
                     <button className={cx('btnShop')}>Pants</button>

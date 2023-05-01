@@ -169,7 +169,6 @@ export default function OrderScreen() {
                 <title>Order {orderId}</title>
             </Helmet>
             <h1 className="my-3">Order by {order.shippingAddress.fullName}</h1>
-            <h3 className="my-3">ID: {orderId}</h3>
             <Row>
                 <Col md={8}>
                     <Card className="mb-3">
@@ -177,7 +176,8 @@ export default function OrderScreen() {
                             <Card.Title>Shipping</Card.Title>
                             <Card.Text>
                                 <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                                <strong>Address: </strong> {order.shippingAddress.address},{order.shippingAddress.city},{' '}
+                                <strong>Phone Number:</strong> {order.shippingAddress.address} <br />
+                                <strong>Address: </strong>{order.shippingAddress.city},{' '}
                                 {order.shippingAddress.postalCode},{order.shippingAddress.country}
                             </Card.Text>
                             {order.isDelivered ? (

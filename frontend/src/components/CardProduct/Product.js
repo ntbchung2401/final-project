@@ -42,7 +42,7 @@ function Product(props) {
                 </Card.Text>
                 {product.counInStock === 0 ? (
                     <Button variant="danger" disabled>
-                        Out of stock
+                        Sold Out
                     </Button>
                 ) : (
                     <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>

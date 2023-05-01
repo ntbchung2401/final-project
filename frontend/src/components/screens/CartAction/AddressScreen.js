@@ -62,19 +62,19 @@ export default function AddressScreen() {
                         <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="address">
-                        <Form.Label>Address</Form.Label>
+                        <Form.Label>Phone Number</Form.Label>
                         <Form.Control value={address} onChange={(e) => setAddress(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="city">
-                        <Form.Label>City</Form.Label>
+                        <Form.Label>Street</Form.Label>
                         <Form.Control value={city} onChange={(e) => setCity(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="postalCode">
-                        <Form.Label>Postal Code</Form.Label>
+                        <Form.Label>District</Form.Label>
                         <Form.Control value={postalCode} onChange={(e) => setPostalCode(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="country">
-                        <Form.Label>Country</Form.Label>
+                        <Form.Label>City</Form.Label>
                         <Form.Control value={country} onChange={(e) => setCountry(e.target.value)} required />
                     </Form.Group>
                     <div className="mb-3">

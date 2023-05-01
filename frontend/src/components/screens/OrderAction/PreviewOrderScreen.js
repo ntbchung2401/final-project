@@ -87,7 +87,8 @@ export default function PreviewOrderScreen() {
                             <Card.Title>Shipping</Card.Title>
                             <Card.Text>
                                 <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                                <strong>Address: </strong> {cart.shippingAddress.address},{cart.shippingAddress.city},{' '}
+                                <strong>Phone Number:</strong> {cart.shippingAddress.address} <br />
+                                <strong>Address: </strong>{cart.shippingAddress.city},{' '}
                                 {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
                             </Card.Text>
                             <Link to="/address">Edit</Link>

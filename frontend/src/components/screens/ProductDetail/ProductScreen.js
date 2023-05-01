@@ -81,7 +81,7 @@ function ProductScreen() {
         });
         navigate('/cart');
     };
-    const submitHandler = async (e) => {   
+    const submitHandler = async (e) => {
         e.preventDefault();
         if (!comment || !rating) {
             toast.error('Please enter comment and rating');
@@ -123,7 +123,7 @@ function ProductScreen() {
                 <Col md={6}>
                     <img className="img-large" src={product.image} alt={product.name}></img>
                 </Col>
-                <Col md={3}>
+                <Col md={4}>
                     <ListGroup variant="flush">
                         <ListGroup.Item>
                             <Helmet>
@@ -141,14 +141,14 @@ function ProductScreen() {
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={2}>
                     <Card>
                         <Card.Body>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <Row>
-                                        <Col>Price:</Col>
-                                        <Col>${product.price}</Col>
+                                        <Col>InStock:</Col>
+                                        <Col>{product.counInStock}</Col>
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
@@ -156,7 +156,7 @@ function ProductScreen() {
                                         <Col>Status:</Col>
                                         <Col>
                                             {product.counInStock > 0 ? (
-                                                <Badge bg="primary">In Stock</Badge>
+                                                <Badge bg="success">Available</Badge>
                                             ) : (
                                                 <Badge bg="danger">Unavailable</Badge>
                                             )}
