@@ -175,10 +175,10 @@ export default function OrderScreen() {
                         <Card.Body>
                             <Card.Title>Shipping</Card.Title>
                             <Card.Text>
-                                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                                <strong>Phone Number:</strong> {order.shippingAddress.address} <br />
-                                <strong>Address: </strong>{order.shippingAddress.city},{' '}
-                                {order.shippingAddress.postalCode},{order.shippingAddress.country}
+                                <strong>Receiver Name:</strong> {order.shippingAddress.fullName} <br />
+                                <strong>Phone Number:</strong> {order.shippingAddress.phoneNum} <br />
+                                <strong>Address: </strong>{order.shippingAddress.street},{' '}
+                                {order.shippingAddress.city},{order.shippingAddress.country}
                             </Card.Text>
                             {order.isDelivered ? (
                                 <ErrorMessage variant="success">Delivered at {order.deliveredAt}</ErrorMessage>

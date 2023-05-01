@@ -86,10 +86,10 @@ export default function PreviewOrderScreen() {
                         <Card.Body>
                             <Card.Title>Shipping</Card.Title>
                             <Card.Text>
-                                <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                                <strong>Phone Number:</strong> {cart.shippingAddress.address} <br />
-                                <strong>Address: </strong>{cart.shippingAddress.city},{' '}
-                                {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
+                                <strong>Receiver Name:</strong> {cart.shippingAddress.fullName} <br />
+                                <strong>Phone Number:</strong> {cart.shippingAddress.phoneNum} <br />
+                                <strong>Address: </strong>{cart.shippingAddress.street},{' '}
+                                {cart.shippingAddress.city},{cart.shippingAddress.country}
                             </Card.Text>
                             <Link to="/address">Edit</Link>
                         </Card.Body>

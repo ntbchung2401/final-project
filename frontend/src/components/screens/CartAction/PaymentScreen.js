@@ -13,11 +13,11 @@ export default function PaymentScreen() {
         cart: { shippingAddress, paymentMethod },
     } = state;
 
-    const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'Momo');
+    const [paymentMethodName, setPaymentMethod] = useState(paymentMethod || 'PayPal');
 
     useEffect(() => {
-        if (!shippingAddress.address) {
-            navigate('/shipping');
+        if (!shippingAddress.phoneNum) {
+            navigate('/address');
         }
     }, [shippingAddress, navigate]);
     const submitHandler = (e) => {

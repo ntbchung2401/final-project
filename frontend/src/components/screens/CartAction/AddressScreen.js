@@ -14,12 +14,13 @@ export default function AddressScreen() {
         cart: { shippingAddress },
     } = state;
     const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-    const [address, setAddress] = useState(shippingAddress.address || '');
+    const [phoneNum, setPhoneNum] = useState(shippingAddress.phoneNum || '');
+    const [street, setStreet] = useState(shippingAddress.street || '');
     const [city, setCity] = useState(shippingAddress.city || '');
-    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
+
     useEffect(() => {
         if (!userInfo) {
-            navigate('/login?redirect=/shipping');
+            navigate('/login?redirect=/address');
         }
     }, [userInfo, navigate]);
     const [country, setCountry] = useState(shippingAddress.country || '');
@@ -29,9 +30,9 @@ export default function AddressScreen() {
             type: 'SAVE_SHIPPING_ADDRESS',
             payload: {
                 fullName,
-                address,
+                phoneNum,
+                street,
                 city,
-                postalCode,
                 country,
             },
         });
@@ -39,9 +40,9 @@ export default function AddressScreen() {
             'shippingAddress',
             JSON.stringify({
                 fullName,
-                address,
+                phoneNum,
+                street,
                 city,
-                postalCode,
                 country,
             }),
         );
@@ -55,26 +56,26 @@ export default function AddressScreen() {
 
             <CheckoutSteps step1 step2></CheckoutSteps>
             <div className="container small-container">
-                <h1 className="my-3">Shipping Address</h1>
+                <h1 className="my-3">Your Shipping Address</h1>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="fullName">
-                        <Form.Label>Full Name</Form.Label>
+                        <Form.Label>Receiver Name</Form.Label>
                         <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="address">
+                    <Form.Group className="mb-3" controlId="phoneNum">
                         <Form.Label>Phone Number</Form.Label>
-                        <Form.Control value={address} onChange={(e) => setAddress(e.target.value)} required />
+                        <Form.Control value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)} required />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="street">
+                        <Form.Label>Street</Form.Label>
+                        <Form.Control value={street} onChange={(e) => setStreet(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="city">
-                        <Form.Label>Street</Form.Label>
+                        <Form.Label>City</Form.Label>
                         <Form.Control value={city} onChange={(e) => setCity(e.target.value)} required />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="postalCode">
-                        <Form.Label>District</Form.Label>
-                        <Form.Control value={postalCode} onChange={(e) => setPostalCode(e.target.value)} required />
-                    </Form.Group>
                     <Form.Group className="mb-3" controlId="country">
-                        <Form.Label>City</Form.Label>
+                        <Form.Label>Country</Form.Label>
                         <Form.Control value={country} onChange={(e) => setCountry(e.target.value)} required />
                     </Form.Group>
                     <div className="mb-3">

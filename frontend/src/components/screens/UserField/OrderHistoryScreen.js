@@ -8,6 +8,7 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import Button from 'react-bootstrap/esm/Button';
 import Footer from '../../Footer/Footer.jsx';
+import { Badge } from 'react-bootstrap';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -67,10 +68,10 @@ export default function OrderHistoryScreen() {
                         <tr>
                             <th>ID</th>
                             <th>Items</th>
-                            <th>Order At</th>
                             <th>Total</th>
+                            <th>Order At</th>
                             <th>Paid</th>
-                            <th>Delivered</th>
+                            <th>Delivered to</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -90,10 +91,10 @@ export default function OrderHistoryScreen() {
                                         </tbody>
                                     </table>
                                 </td>
+                                <td>{order.totalPrice.toFixed(2)} $</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
-                                <td>{order.totalPrice.toFixed(2)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                                <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : 'No'}</td>
+                                <td>{order.isDelivered ? order.shippingAddress.city : <Badge bg="danger">No</Badge>}</td>
                                 <td>
                                     <Button
                                         type="button"
