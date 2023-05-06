@@ -131,11 +131,17 @@ export default function ProductListScreen() {
                         <tbody>
                             {products.map((product) => (
                                 <tr key={product._id}>
-                                    <td>{product._id}</td>
+                                    <td>
+                                        <img
+                                            src={product.image}
+                                            alt={product.image}
+                                            className="img-fluid rounded img-thumbnail"
+                                        ></img>
+                                    </td>
                                     <td>{product.name}</td>
                                     <td>{product.price}</td>
-                                    <td>{product.category}</td>
-                                    <td>{product.brand}</td>
+                                    <td>{product.category.name}</td>
+                                    <td>{product.brand.brand}</td>
                                     <td>{product.counInStock}</td>
                                     <td>
                                         <Button

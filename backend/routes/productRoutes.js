@@ -1,14 +1,23 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import Brand from "../models/brandModel.js";
+import Category from "../models/categoryModel.js";
 import { isAuth, isAdmin } from "../utils.js";
 
 const productRouter = express.Router();
 
-productRouter.get("/", async (req, res) => {
-  const products = await Product.find();
-  res.send(products);
-});
+productRouter.get(
+  "/",
+  expressAsyncHandler(async (req, res) => {
+    const products = await Product.find({})
+      .sort({ createdAt: -1 })
+      .populate({ path: "brand", model: Brand })
+      .populate({ path: "category", model: Category });
+
+    res.send(products);
+  })
+);
 
 productRouter.post(
   "/",
@@ -104,7 +113,12 @@ productRouter.get(
 
     const products = await Product.find()
       .skip(pageSize * (page - 1))
-      .limit(pageSize);
+      .limit(pageSize)
+      .populate("brand")
+      .populate({
+        path: "category",
+        select: "name", // Only select the 'name' field of the category
+      });
     const countProducts = await Product.countDocuments();
     res.send({
       products,
@@ -153,16 +167,14 @@ productRouter.post(
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
-    const { query } = req;
-    const pageSize = query.pageSize || PAGE_SIZE;
-    const page = query.page || 1;
-    const category = query.category || "";
-    const price = query.price || "";
-    const rating = query.rating || "";
-    const order = query.order || "";
-    const searchQuery = query.query || "";
+    const pageSize = req.query.pageSize || PAGE_SIZE;
+    const page = req.query.page || 1;
+    const category = req.query.category || "";
+    const price = req.query.price || "";
+    const rating = req.query.rating || "";
+    const order = req.query.order || "";
+    const searchQuery = req.query.query || "";
 
-    // Apply filters based on query parameters
     const queryFilter =
       searchQuery && searchQuery !== "all"
         ? {
@@ -172,7 +184,8 @@ productRouter.get(
             },
           }
         : {};
-    const categoryFilter = category && category !== "all" ? { category } : {};
+    const categoryFilter =
+      category && category !== "all" ? { category: { $in: [category] } } : {};
     const ratingFilter =
       rating && rating !== "all"
         ? {
@@ -184,14 +197,13 @@ productRouter.get(
     const priceFilter =
       price && price !== "all"
         ? {
+            // 1-50
             price: {
               $gte: Number(price.split("-")[0]),
               $lte: Number(price.split("-")[1]),
             },
           }
         : {};
-
-    // Determine sorting order
     const sortOrder =
       order === "featured"
         ? { featured: -1 }
@@ -205,7 +217,6 @@ productRouter.get(
         ? { createdAt: -1 }
         : { _id: -1 };
 
-    // Fetch products based on filters, sorting, pagination
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
@@ -216,15 +227,12 @@ productRouter.get(
       .skip(pageSize * (page - 1))
       .limit(pageSize);
 
-    // Count total number of products matching the filters
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
-
-    // Send the response with products, pagination details
     res.send({
       products,
       countProducts,
@@ -233,17 +241,18 @@ productRouter.get(
     });
   })
 );
-
 productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct("category");
+    const categories = await Category.find({}, "name");
     res.send(categories);
   })
 );
 
 productRouter.get("/display/:display", async (req, res) => {
-  const product = await Product.findOne({ display: req.params.display });
+  const product = await Product.findOne({ display: req.params.display })
+    .populate({ path: "brand", model: Brand })
+    .populate({ path: "category", model: Category });
   if (product) {
     res.send(product);
   } else {
@@ -252,7 +261,9 @@ productRouter.get("/display/:display", async (req, res) => {
 });
 
 productRouter.get("/:id", async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id)
+    .populate({ path: "brand", model: Brand })
+    .populate({ path: "category", model: Category });
   if (product) {
     res.send(product);
   } else {

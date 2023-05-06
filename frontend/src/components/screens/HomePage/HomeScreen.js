@@ -36,7 +36,7 @@ function HomeScreen() {
         error: '',
     });
     const [currentPages, setCurrentPages] = useState(1);
-    const [postPerPages, setPostPerPages] = useState(12);
+    const [postPerPages, setPostPerPages] = useState(8);
     useEffect(() => {
         const fetchData = async () => {
             dispatch({ type: 'FETCH_REQUEST' });

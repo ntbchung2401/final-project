@@ -6,10 +6,10 @@ import './CheckoutSteps.css';
 export default function CheckoutSteps(props) {
     return (
         <Row className="checkout-steps">
-            <Col className={props.step1 ? 'active' : ''}>Sign-In</Col>
-            <Col className={props.step2 ? 'active' : ''}>Address</Col>
-            <Col className={props.step3 ? 'active' : ''}>Payment</Col>
-            <Col className={props.step4 ? 'active' : ''}>Preview Order</Col>
+            <Col className={props.step1 ? 'active' : ''}>Cart Action</Col>
+            <Col className={props.step2 ? 'active' : ''}>Shipping Address</Col>
+            <Col className={props.step3 ? 'active' : ''}>Payment Method</Col>
+            <Col className={props.step4 ? 'active' : ''}>Review Order</Col>
         </Row>
     );
 }

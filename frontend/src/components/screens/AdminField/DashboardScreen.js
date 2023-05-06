@@ -123,12 +123,12 @@ export default function DashboardScreen() {
                         )}
                     </div>
                     <div className="my-3">
-                        <h2>Categories</h2>
+                        <h4>Categories</h4>
                         {summary.productCategories.length === 0 ? (
                             <ErrorMessage>No Category</ErrorMessage>
                         ) : (
                             <Chart
-                                width="100%"
+                                width="90%"
                                 height="400px"
                                 chartType="PieChart"
                                 loader={<div>Loading Chart...</div>}
@@ -136,21 +136,25 @@ export default function DashboardScreen() {
                                     ['Category', 'Products'],
                                     ...summary.productCategories.map((x) => [x._id, x.count]),
                                 ]}
-                            ></Chart>
+                            />
                         )}
                     </div>
+
                     <div className="my-3">
-                        <h2>Brands</h2>
+                        <h4>Brands</h4>
                         {summary.productBrands.length === 0 ? (
                             <ErrorMessage>No Brand</ErrorMessage>
                         ) : (
                             <Chart
-                                width="100%"
+                                width="90%"
                                 height="400px"
                                 chartType="PieChart"
                                 loader={<div>Loading Chart...</div>}
-                                data={[['Brand', 'Products'], ...summary.productBrands.map((x) => [x._id, x.count])]}
-                            ></Chart>
+                                data={[
+                                    ['Brand', 'Products'],
+                                    ...summary.productBrands.map((x) => [x._id, x.count]),
+                                ]}
+                            />
                         )}
                     </div>
                 </>

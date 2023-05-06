@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
+import { Col, ListGroup, Row } from 'react-bootstrap';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -58,6 +59,30 @@ export default function ProductEditScreen() {
     const [counInStock, setcounInStock] = useState('');
     const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
+    const [brands, setBrands] = useState([]);
+    const [cate, setCate] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('/api/brands')
+            .then((response) => {
+                setBrands(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    useEffect(() => {
+        axios
+            .get('/api/categories')
+            .then((response) => {
+                setCate(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,9 +93,9 @@ export default function ProductEditScreen() {
                 setDisplay(data.display);
                 setPrice(data.price);
                 setImage(data.image);
-                setCategory(data.category);
+                setCategory(data.category.name);
                 setcounInStock(data.counInStock);
-                setBrand(data.brand);
+                setBrand(data.brand.brand);
                 setDescription(data.description);
                 dispatch({ type: 'FETCH_SUCCESS' });
             } catch (err) {
@@ -146,31 +171,45 @@ export default function ProductEditScreen() {
             ) : error ? (
                 <ErrorMessage variant="danger">{error}</ErrorMessage>
             ) : (
+                <Row>
+            <Col md={8}>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Name</Form.Label>
                         <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="display">
-                        <Form.Label>Display</Form.Label>
+                        <Form.Label>Tag</Form.Label>
                         <Form.Control value={display} onChange={(e) => setDisplay(e.target.value)} required />
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-3" controlId="category">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Select value={category} required onChange={(e) => setCategory(e.target.value)}>
+                            {cate.map((cate, index) => {
+                                return (
+                                    <option key={index} value={cate._id}>
+                                        {cate.name}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="brand">
+                        <Form.Label>Brand</Form.Label>
+                        <Form.Select value={brand} required onChange={(e) => setBrand(e.target.value)}>
+                            {brands.map((brands, index) => {
+                                return (
+                                    <option key={index} value={brands._id}>
+                                        {brands.brand}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label>Price</Form.Label>
                         <Form.Control value={price} onChange={(e) => setPrice(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="imageFile">
-                        <Form.Label>Upload File</Form.Label>
-                        <Form.Control type="file" onChange={uploadFileHandler} />
-                        {loadingUpload && <LoadingSpinner></LoadingSpinner>}
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="category">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Control value={category} onChange={(e) => setCategory(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="brand">
-                        <Form.Label>Brand</Form.Label>
-                        <Form.Control value={brand} onChange={(e) => setBrand(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="counInStock">
                         <Form.Label>Count In Stock</Form.Label>
@@ -180,6 +219,11 @@ export default function ProductEditScreen() {
                         <Form.Label>Description</Form.Label>
                         <Form.Control value={description} onChange={(e) => setDescription(e.target.value)} required />
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="imageFile">
+                        <Form.Label>Upload File</Form.Label>
+                        <Form.Control type="file" onChange={uploadFileHandler} />
+                        {loadingUpload && <LoadingSpinner></LoadingSpinner>}
+                    </Form.Group>
                     <div className="mb-3">
                         <Button disabled={loadingUpdate} type="submit">
                             Update
@@ -187,6 +231,30 @@ export default function ProductEditScreen() {
                         {loadingUpdate && <LoadingSpinner></LoadingSpinner>}
                     </div>
                 </Form>
+                </Col>
+                <Col className="col-4">
+                        <ListGroup.Item>
+                            <Row className="avatar-display">
+                                <Col
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        borderRadius: '50%',
+                                        justifyContent: 'center',
+                                        marginTop: '50%',
+                                    }}
+                                >
+                                    <div></div>
+                                    <img
+                                        src={image}
+                                        alt={image}
+                                        className="img-fluid rounded mx-auto d-block img-thumbnails"
+                                    ></img>
+                                </Col>
+                            </Row>
+                        </ListGroup.Item>
+                    </Col>
+                </Row>
             )}
         </Container>
     );

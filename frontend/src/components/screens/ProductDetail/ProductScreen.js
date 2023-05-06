@@ -16,6 +16,7 @@ import { Shop } from '../../../Shop';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 import { Form } from 'react-bootstrap';
+import { RiPriceTag3Line } from 'react-icons/ri';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -130,6 +131,14 @@ function ProductScreen() {
                                 <title>{product.name}</title>
                             </Helmet>
                             <h1>{product.name}</h1>
+                            <i>
+                                <RiPriceTag3Line />
+                                {product.category.name}
+                            </i>
+                            <i>
+                                <RiPriceTag3Line />
+                                {product.brand.brand}
+                            </i>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Rating rating={product.rating} numReviews={product.numReviews}></Rating>

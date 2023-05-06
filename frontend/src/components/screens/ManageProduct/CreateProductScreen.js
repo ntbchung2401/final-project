@@ -10,6 +10,7 @@ import { getError } from '~/getError';
 import LoadingSpinner from '~/components/LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '~/components/ErrorMessage/ErrorMessage';
 import { toast } from 'react-toastify';
+import { Col, ListGroup, Row } from 'react-bootstrap';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -54,7 +55,7 @@ export default function CreateProductScreen() {
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    const [counInStock, setcounInStock] = useState('');
+    const [inStock, setInStock] = useState('');
     const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
     const [brands, setBrands] = useState([]);
@@ -142,65 +143,92 @@ export default function CreateProductScreen() {
                 <title>Create New Product</title>
             </Helmet>
             <h1>Create New Product</h1>
+            <Row>
+            <Col md={8}>
             <Form onSubmit={createHandler}>
-                <Form.Group className="mb-3" controlId="name">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="display">
-                    <Form.Label>Tag</Form.Label>
-                    <Form.Control value={display} onChange={(e) => setDisplay(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="price">
-                    <Form.Label>Price</Form.Label>
-                    <Form.Control value={price} onChange={(e) => setPrice(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="category">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Select value={category} required onChange={(e) => setCategory(e.target.value)}>
-                        <option value="">-----Select a Category------</option>
-                        {cate.map((cate, index) => {
-                            return (
-                                <option key={index} value={cate.name}>
-                                    {cate.name}
-                                </option>
-                            );
-                        })}
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="brand">
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Select value={brand} required onChange={(e) => setBrand(e.target.value)}>
-                        <option value="">-----Select a Brand------</option>
-                        {brands.map((brands, index) => {
-                            return (
-                                <option key={index} value={brands.brand}>
-                                    {brands.brand}
-                                </option>
-                            );
-                        })}
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control value={description} onChange={(e) => setDescription(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="imageFile">
-                    <Form.Label>Product Image</Form.Label>
-                    <Form.Control type="file" onChange={uploadFileHandler} />
-                    {loadingUpload && <LoadingSpinner></LoadingSpinner>}
-                </Form.Group>
-                <div className="mb-3">
-                    <Button
-                        disabled={loadingCreate}
-                        type="submit"
-                        // onClick={createHandler}
-                    >
-                        Create
-                    </Button>
-                    {loadingCreate && <LoadingSpinner></LoadingSpinner>}
-                </div>
-            </Form>
+                    <Form.Group className="mb-3" controlId="name">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control value={name} onChange={(e) => setName(e.target.value)} required />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="display">
+                        <Form.Label>Tag</Form.Label>
+                        <Form.Control value={display} onChange={(e) => setDisplay(e.target.value)} required />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="price">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control value={price} onChange={(e) => setPrice(e.target.value)} required />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="category">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Select value={category} required onChange={(e) => setCategory(e.target.value)}>
+                            <option value="">-----Select a Category------</option>
+                            {cate.map((cate, index) => {
+                                return (
+                                    <option key={index} value={cate._id}>
+                                        {cate.name}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="brand">
+                        <Form.Label>Brand</Form.Label>
+                        <Form.Select value={brand} required onChange={(e) => setBrand(e.target.value)}>
+                            <option value="">-----Select a Brand------</option>
+                            {brands.map((brands, index) => {
+                                return (
+                                    <option key={index} value={brands._id}>
+                                        {brands.brand}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="description">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control value={description} onChange={(e) => setDescription(e.target.value)} required />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="imageFile">
+                        <Form.Label>Product Image</Form.Label>
+                        <Form.Control type="file" onChange={uploadFileHandler} />
+                        {loadingUpload && <LoadingSpinner></LoadingSpinner>}
+                    </Form.Group>
+                    <div className="mb-3">
+                        <Button
+                            disabled={loadingCreate}
+                            type="submit"
+                            // onClick={createHandler}
+                        >
+                            Create
+                        </Button>
+                        {loadingCreate && <LoadingSpinner></LoadingSpinner>}
+                    </div>
+                    </Form>
+            </Col>
+            <Col className="col-4">
+                        <ListGroup.Item>
+                            <Row className="avatar-display">
+                                <Col
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        borderRadius: '50%',
+                                        justifyContent: 'center',
+                                        marginTop: '50%',
+                                    }}
+                                >
+                                    <div></div>
+                                    <img
+                                        src={image}
+                                        alt={image}
+                                        className="img-fluid rounded mx-auto d-block img-thumbnails"
+                                    ></img>
+                                </Col>
+                            </Row>
+                        </ListGroup.Item>
+                    </Col>
+                    
+                    </Row>
         </Container>
     );
 }

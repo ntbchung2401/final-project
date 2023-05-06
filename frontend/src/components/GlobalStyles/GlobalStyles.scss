@@ -88,3 +88,15 @@ main {
     margin-bottom: 10px;
     margin-right: 0;
 }
+.img-thumbnails {
+    display: block;
+    justify-content: center;
+    height: 300px;
+    width: 600px;
+    border: 1px solid black;
+}
+.avatar-display {
+    align-items: center;
+    justify-content: center;
+    transform: translateY(10%);
+}

@@ -29,7 +29,12 @@ const reducer = (state, action) => {
             };
         case 'FETCH_FAIL':
             return { ...state, loading: false, error: action.payload };
-
+        case 'SET_CATEGORY':
+            return {
+                ...state,
+                category: action.payload,
+                page: 1, // Reset page to 1 when category changes
+            };
         default:
             return state;
     }
@@ -53,12 +58,12 @@ export default function SearchScreen() {
 
     const prices = [
         {
-            name: '$1 to $50',
-            value: '1-50',
+            name: '$50 to $100',
+            value: '50-100',
         },
         {
-            name: '$51 to $200',
-            value: '51-200',
+            name: '$101 to $200',
+            value: '101-200',
         },
         {
             name: '$201 to $1000',
@@ -116,6 +121,10 @@ export default function SearchScreen() {
         };
         fetchCategories();
     }, [dispatch]);
+    const getCategoryName = (categoryId) => {
+        const selectedCategory = categories.find((c) => c._id === categoryId);
+        return selectedCategory ? selectedCategory.name : '';
+      };
 
     const getFilterUrl = (filter) => {
         const filterPage = filter.page || page;
@@ -135,7 +144,7 @@ export default function SearchScreen() {
             <Row>
                 <SearchBox />
                 <Col md={3}>
-                    <h3>Category Available</h3>
+                    <h3>Categories</h3>
                     <div>
                         <ul>
                             <li>
@@ -143,16 +152,16 @@ export default function SearchScreen() {
                                     className={'all' === category ? 'text-bold' : ''}
                                     to={getFilterUrl({ category: 'all' })}
                                 >
-                                    Any
+                                    All
                                 </Link>
                             </li>
                             {categories.map((c) => (
-                                <li key={c}>
+                                <li key={c._id}>
                                     <Link
                                         className={c === category ? 'text-bold' : ''}
-                                        to={getFilterUrl({ category: c })}
+                                        to={getFilterUrl({ category: c._id })}
                                     >
-                                        {c}
+                                        {c.name}
                                     </Link>
                                 </li>
                             ))}
@@ -166,7 +175,7 @@ export default function SearchScreen() {
                                     className={'all' === price ? 'text-bold' : ''}
                                     to={getFilterUrl({ price: 'all' })}
                                 >
-                                    Any
+                                    All
                                 </Link>
                             </li>
                             {prices.map((p) => (
@@ -182,7 +191,7 @@ export default function SearchScreen() {
                         </ul>
                     </div>
                     <div>
-                        <h3>Avg. Customer Review</h3>
+                        <h3>Customer Reviews</h3>
                         <ul>
                             {ratings.map((r) => (
                                 <li key={r.name}>
@@ -217,7 +226,7 @@ export default function SearchScreen() {
                                     <div>
                                         {countProducts === 0 ? 'No' : countProducts} Results
                                         {query !== 'all' && ' : ' + query}
-                                        {category !== 'all' && ' : ' + category}
+                                        {category !== 'all' && ' : ' + getCategoryName(category)}
                                         {price !== 'all' && ' : Price ' + price}
                                         {rating !== 'all' && ' : Rating ' + rating + ' & up'}
                                         {query !== 'all' ||
