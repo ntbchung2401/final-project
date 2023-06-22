@@ -1,0 +1,102 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import '../../components/GlobalStyles/mixins.scss';
+:root {
+    --nothingNew: black;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+main {
+    flex: 1;
+}
+.footer {
+    margin-top: auto;
+  }
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    border: 1px #404040 solid;
+    margin: 1rem;
+}
+.product img {
+    width: 100%;
+    max-width: 400px;
+}
+.product-info {
+    padding: 1rem;
+}
+.site-container {
+    min-height: 100vh;
+}
+.btn-primary,
+.btn-outline-primary {
+    background-color: #05cff7;
+    color: white;
+    font-weight: bold;
+}
+.main-contents {
+    max-width: calc(100% - 20px);
+    margin: 0 auto;
+    @include md {
+        max-width: 1200px;
+    }
+}
+.img-large {
+    max-width: 80%;
+}
+.img-thumbnail {
+    height: 80px;
+}
+.small-container {
+    max-width: 800px;
+}
+.text-bold {
+    font-weight: bold;
+}
+.login_form_container,
+.register_form_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    justify-content: center;
+}
+.login_form_image {
+    background-image: url(https://res.cloudinary.com/dshdorhq9/image/upload/v1678490373/samples/ecommerce/accessories-bag.jpg);
+    height: 90vh;
+    background-size: cover;
+    margin-bottom: 10px;
+    margin-right: 0;
+}
+.img-thumbnails {
+    display: block;
+    justify-content: center;
+    height: 300px;
+    width: 600px;
+    border: 1px solid black;
+}
+.avatar-display {
+    align-items: center;
+    justify-content: center;
+    transform: translateY(10%);
+}
