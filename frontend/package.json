@@ -1,6 +1,6 @@
 {
     "name": "frontend",
-    "proxy": "http://localhost:10000/",
+    "proxy": "https://chungntbstore.onrender.com/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
